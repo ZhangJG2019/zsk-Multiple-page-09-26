@@ -30,6 +30,8 @@ module.exports = {
     proxyTable: {
       '/front': {
         target: 'http://192.168.1.66:8883'
+        // target: 'http: //47.104.168.172:8084'
+
       }
     },
 

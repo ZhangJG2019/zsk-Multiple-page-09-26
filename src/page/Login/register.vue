@@ -7,97 +7,87 @@
       >
         <div class="registered">
           <h4>注册 三济生物 账号</h4>
-          <div class="content" style="margin-top: 20px;">
-            <ul class="common-form">
-              <li class="username border-1p">
-                <div style="margin-top: 40px;" class="input">
-                  <input
-                    type="text"
-                    v-model="registered.userName"
-                    placeholder="账号"
-                    @keyup="
-                      registered.userName = registered.userName.replace(
-                        /[^\w\.\/]/gi,
-                        ''
-                      )
-                    "
-                  />
-                </div>
-              </li>
-              <li>
-                <div class="input">
-                  <input
-                    type="password"
-                    v-model="registered.userPwd"
-                    placeholder="密码"
-                  />
-                </div>
-              </li>
-              <li>
-                <div class="input">
-                  <input
-                    type="password"
-                    v-model="registered.userPwd2"
-                    placeholder="重复密码"
-                  />
-                </div>
-              </li>
-              <li>
-                <div id="captcha">
-                  <p id="wait">正在加载验证码...</p>
-                </div>
-              </li>
-            </ul>
-            <el-checkbox class="agree" v-model="agreement">
-              我已阅读并同意遵守
-              <a
-                @click="
-                  open(
-                    '法律声明',
-                    '此仅为个人练习开源模仿项目，仅供学习参考，承担不起任何法律问题'
-                  )
-                "
-                >法律声明</a
-              >
-              和
-              <a
-                @click="
-                  open(
-                    '隐私条款',
-                    '本网站将不会严格遵守有关法律法规和本隐私政策所载明的内容收集、使用您的信息'
-                  )
-                "
-                >隐私条款</a
-              >
-            </el-checkbox>
-            <div style="margin-bottom: 30px;">
-              <y-button
-                :classStyle="
-                  registered.userPwd &&
-                  registered.userPwd2 &&
-                  registered.userName &&
-                  registxt === '注册'
-                    ? 'main-btn'
-                    : 'disabled-btn'
-                "
-                :text="registxt"
-                style="margin: 0;width: 100%;height: 48px;font-size: 18px;line-height: 48px"
-                @btnClick="regist"
-              >
-              </y-button>
-            </div>
-            <div class="border" style="margin-bottom: 10px;"></div>
-            <ul class="common-form pr">
-              <!-- <li class="pa" style="left: 0;top: 0;margin: 0;color: #d44d44">{{registered.errMsg}}</li> -->
-              <li
-                style="text-align: center;line-height: 48px;margin-bottom: 0;font-size: 12px;color: #999;"
-              >
-                <span>如果您已拥有 三济生物 账号，则可在此</span>
-                <a href="javascript:;" style="margin: 0 5px" @click="toLogin"
-                  >登陆</a
+          <div class="content_center" style="margin-top:40px">
+            <el-form
+              :model="ruleForm"
+              status-icon
+              :rules="loginFormRules"
+              ref="ruleForm"
+              label-width="80px"
+              class="demo-ruleForm"
+            >
+              <el-form-item label="用户名" prop="username">
+                <el-input
+                  clearable
+                  class="inputMsg"
+                  v-model="ruleForm.username"
+                  autoComplete="off"
                 >
-              </li>
-            </ul>
+                </el-input>
+              </el-form-item>
+              <el-form-item label="密码" prop="password">
+                <el-input
+                  clearable
+                  class="inputMsg"
+                  type="password"
+                  v-model="ruleForm.password"
+                  autoComplete="off"
+                ></el-input>
+              </el-form-item>
+              <el-form-item label="手机号" prop="mobile">
+                <el-input
+                  clearable
+                  class="inputMsg"
+                  v-model="ruleForm.mobile"
+                  placeholder="请输入手机号"
+                ></el-input>
+              </el-form-item>
+              <el-form-item label="验证码" prop="verifyCode">
+                <el-input
+                  clearable
+                  v-model.number="ruleForm.verifyCode"
+                  style="width: 60%;"
+                ></el-input>
+                <el-button
+                  class="smsMsg"
+                  type="primary"
+                  @click="sendcode"
+                  :disabled="disabled"
+                  v-if="disabled == false"
+                  style="margin-left:15px"
+                  >发送验证码
+                </el-button>
+                <el-button
+                  class="smsMsg"
+                  type="button"
+                  @click="sendcode"
+                  :disabled="disabled"
+                  v-if="disabled == true"
+                >
+                  {{ btntxt }}</el-button
+                >
+              </el-form-item>
+
+              <el-form-item prop="type">
+                <el-checkbox-group
+                  v-model="ruleForm.type"
+                  style="margin-left:-40px!important"
+                >
+                  <el-checkbox name="type" checked
+                    >阅读并接受<a href="####">《三济用户协议》</a>及<a
+                      href="####"
+                      >《三济隐私权保护声明》</a
+                    >
+                  </el-checkbox>
+                </el-checkbox-group>
+              </el-form-item>
+              <el-form-item>
+                <el-button type="primary" @click="submitForm('ruleForm')"
+                  >提交</el-button
+                >
+                <el-button @click="resetForm('ruleForm')">重置</el-button>
+              </el-form-item>
+            </el-form>
           </div>
         </div>
       </div>
@@ -108,28 +98,98 @@
 <script>
 import YFooter from '/common/footer'
 import YButton from '/components/YButton'
-import { register, geetest } from '/api/index.js'
 require('../../../static/geetest/gt.js')
-var captcha
+import 'element-ui'
+// import $ from 'jquery'
+import axios from 'axios'
+import qs from 'qs'
 export default {
   data () {
     return {
-      cart: [],
       loginPage: true,
+      disabled: false,
+      time: 0,
+      input: '',
+      btntxt: '重新发送',
+      checked: true,
+      keyWord: '', // 搜索关键字
+      // username: localStorage.getItem('username'), // 从localStorage中获取name
+      // 登录弹窗字段
+      dialogFormVisible: false,
+      form: {
+        username: '',
+        password: '',
+        type: []
+      },
+      // 注册页面字段
       ruleForm: {
-        userName: '',
-        userPwd: '',
-        errMsg: ''
+        mobile: '',
+        username: '',
+        password: '',
+        verifyCode: '',
+        type: []
       },
-      registered: {
-        userName: '',
-        userPwd: '',
-        userPwd2: '',
-        errMsg: ''
+      // 校验规则
+      loginFormRules: {
+        username: [
+          {
+            required: true,
+            message: '请输入用户名',
+            trigger: 'blur'
+          }
+        ],
+        password: [
+          {
+            validator: validatePass,
+            trigger: 'blur'
+          }
+        ],
+        verifyCode: [
+          {
+            validator: checkSendcode,
+            trigger: 'blur'
+          }
+        ],
+        type: [
+          {
+            type: 'array',
+            required: true,
+            message: '请勾选“阅读并接受三济用户协议”',
+            trigger: 'change'
+          }
+        ]
       },
-      agreement: false,
-      registxt: '注册',
-      statusKey: ''
+      formLabelWidth: '1px'
+    }
+    // 发送验证码校验
+    // eslint-disable-next-line no-unreachable
+    var checkSendcode = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('验证码不能为空'))
+      }
+      setTimeout(() => {
+        if (!Number.isInteger(value)) {
+          callback(new Error('请输入数字值'))
+        } else {
+          if (value !== 6) {
+            callback(new Error('请输入正确验证码'))
+          } else {
+            callback()
+          }
+        }
+      }, 1000)
+    }
+    // 密码校验
+    // eslint-disable-next-line no-unreachable
+    var validatePass = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请输入密码'))
+      } else {
+        if (this.ruleForm.checkPass !== '') {
+          this.$refs.ruleForm.validateField('checkPass')
+        }
+        callback()
+      }
     }
   },
   computed: {
@@ -138,110 +198,139 @@ export default {
     }
   },
   methods: {
-    open (t, m) {
-      this.$notify.info({
-        title: t,
-        message: m
+    login () {
+      // 对登录的form表单进行整体校验
+      // this.$refs.loginFormRef.validate(function(valid){})
+      this.$refs.loginFormRef.validate(valid => {
+        // console.log(valid)  true/false 校验成功或失败
+        if (valid === true) {
+          // 用户信息真实性校验
+          // axios带着用户信息 去到 后端数据库校验
+          axios
+            .post(
+              '/benchApi/login',
+              qs.stringify({
+                username: this.form.username,
+                password: this.form.password
+              })
+            )
+            .then(res => {
+              if (res.status === 200) {
+                window.sessionStorage.setItem('token', res.token)
+                return this.$message.success(res.data.message)
+              } else {
+                return this.$message.error(res.message)
+              }
+              // return this.$message.success('登录成功')
+            })
+            .catch(res => {
+              if (res.response === null) {
+              }
+              if (res.response.data == null) {
+                return this.$message.error('发送异常，登录失败')
+              } else {
+                return this.$message.error(res.response.data.message)
+              }
+            })
+          // 判断用户名或密码 真实性校验失败
+          // 通过浏览器的sessionStorage记录服务器返回的token信息
+          // (校验成功)页面重定向到首页(/index)
+          // this.$router.push('/index')
+        }
       })
     },
-    messageSuccess () {
-      this.$message({
-        message: '恭喜您，注册成功！赶紧登录体验吧',
-        type: 'success'
-      })
+    // 注销操作
+    logout () {
+      // 移除localStorage中的token
+      localStorage.removeItem('token')
+      // 清空username 的数据
+      this.form.username = null
     },
-    message (m) {
-      this.$message.error({
-        message: m
-      })
+    // 手机验证发送验证码
+    sendcode () {
+      const reg = 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/
+      var url = '/benchApi/verifyCode/' + this.ruleForm.mobile
+      if (this.ruleForm.mobile === '') {
+        this.$message({
+          message: '手机号不能为空',
+          center: true
+        })
+        return
+      } else if (!reg.test(this.ruleForm.mobile)) {
+        this.$message({
+          message: '请输入正确的手机号',
+          center: true
+        })
+        return
+      } else {
+        axios({
+          method: 'get',
+          url: url
+        }).then(res => {
+          // this.phonedata = res.data
+          console.log(res)
+          this.$message({
+            message: '发送成功',
+            type: 'success',
+            center: true
+          })
+          this.time = 60
+          this.disabled = true
+          this.timer()
+        })
+      }
     },
-    toLogin () {
-      this.$router.push({
-        path: '/login'
-      })
+    // 60S倒计时
+    timer () {
+      if (this.time > 0) {
+        this.time--
+        this.btntxt = this.time + 's后重新获取'
+        setTimeout(this.timer, 1000)
+      } else {
+        this.time = 0
+        this.btntxt = '获取验证码'
+        this.disabled = false
+      }
     },
-    regist () {
-      this.registxt = '注册中...'
-      let userName = this.registered.userName
-      let userPwd = this.registered.userPwd
-      let userPwd2 = this.registered.userPwd2
-      if (!userName || !userPwd || !userPwd2) {
-        this.message('账号密码不能为空!')
-        this.registxt = '注册'
-        return false
-      }
-      if (userPwd2 !== userPwd) {
-        this.message('两次输入的密码不相同!')
-        this.registxt = '注册'
-        return false
-      }
-      if (!this.agreement) {
-        this.message('您未勾选同意我们的相关注册协议!')
-        this.registxt = '注册'
-        return false
-      }
-      var result = captcha.getValidate()
-      if (!result) {
-        this.message('请完成验证')
-        this.registxt = '注册'
-        return false
-      }
-      register({
-        userName,
-        userPwd,
-        challenge: result.geetest_challenge,
-        validate: result.geetest_validate,
-        seccode: result.geetest_seccode,
-        statusKey: this.statusKey
-      }).then(res => {
-        if (res.success === true) {
-          this.messageSuccess()
-          this.toLogin()
+    // 提交注册表单 1
+    submitForm (formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          alert('注册成功!')
+          this.sizeForm = { brand_right: 0 }
         } else {
-          this.message(res.message)
-          captcha.reset()
-          this.regist = '注册'
+          console.log('注册失败!!')
           return false
         }
       })
     },
-    init_geetest () {
-      geetest().then(res => {
-        this.statusKey = res.statusKey
-        window.initGeetest(
-          {
-            gt: res.gt,
-            challenge: res.challenge,
-            new_captcha: res.new_captcha,
-            offline: !res.success,
-            product: 'popup',
-            width: '100%'
-          },
-          function (captchaObj) {
-            captcha = captchaObj
-            captchaObj.appendTo('#captcha')
-            captchaObj.onReady(function () {
-              document.getElementById('wait').style.display = 'none'
-            })
-          }
-        )
-      })
+    // 提交注册表单 2
+    // 重置注册
+    resetForm (formName) {
+      this.$refs[formName].resetFields()
     }
   },
-  mounted () {
-    this.init_geetest()
-  },
+  mounted () {},
   components: {
     YFooter,
     YButton
   }
 }
 </script>
-<style lang="scss" rel="stylesheet/scss" scoped>
+<style lang="scss" rel="stylesheet/scss" >
 * {
   box-sizing: content-box;
 }
-
+.el-form-item__content,
+.inputMsg el-input {
+  margin-right: 50px !important;
+}
+.el-form-item__content {
+  text-align: center;
+}
+.inputMsg1 {
+  margin-right: 100px !important;
+}
 .login {
   overflow-x: hidden;
   overflow-y: hidden;

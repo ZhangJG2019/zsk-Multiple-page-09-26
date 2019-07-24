@@ -315,7 +315,7 @@
               </a>
             </li>
             <li style="background-color:#f78228;">
-              <a href="#/taskcontrol">
+              <a href="#/taskhall">
                 <i class="iconfont icon-woderenwu"></i>
                 <p>任务大厅</p>
               </a>
@@ -763,12 +763,12 @@ export default {
   color: black;
   background-color: #f1f1f1;
 }
-.el-form--label-top .el-form-item__label{
+.el-form--label-top .el-form-item__label {
   font-size: 16px !important;
   padding-left: 10px;
 }
-.el-form-item{
-  margin-top: 10px;
+.el-form-item {
+  margin: 20px 0 10px 0;
 }
 .el-form-item {
   margin-bottom: 0;

@@ -15,7 +15,7 @@ const addressList = () => import('/page/User/children/addressList.vue')
 const coupon = () => import('/page/User/children/coupon.vue')
 const aihuishou = () => import('/page/User/children/aihuishou.vue')
 const support = () => import('/page/User/children/support.vue')
-const checkout = () => import('/page/Checkout/checkout.vue')
+const taskhall = () => import('/page/Taskhall/taskhall.vue')
 const payment = () => import('/page/Order/payment.vue')
 const paysuccess = () => import('/page/Order/paysuccess.vue')
 const Thanks = () => import('/page/Thanks/thanks.vue')
@@ -163,9 +163,9 @@ export default new Router({
       ]
   },
   {
-    path: '/checkout',
-    name: 'checkout',
-    component: checkout
+    path: '/taskhall',
+    name: 'taskhall',
+    component: taskhall
   },
   {
     path: '*',

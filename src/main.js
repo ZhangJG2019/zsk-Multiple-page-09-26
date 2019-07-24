@@ -30,7 +30,8 @@ import {
   Card,
   Tag,
   Form,
-  FormItem
+  FormItem,
+  CheckboxGroup
 } from 'element-ui'
 import {
   getStore
@@ -56,6 +57,7 @@ Vue.use(Card)
 Vue.use(Tag)
 Vue.use(Form)
 Vue.use(FormItem)
+Vue.use(CheckboxGroup)
 Vue.prototype.$loading = Loading.service
 Vue.prototype.$notify = Notification
 Vue.prototype.$message = Message
