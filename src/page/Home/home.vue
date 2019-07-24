@@ -770,9 +770,9 @@ export default {
 .el-form-item {
   margin: 20px 0 10px 0;
 }
-.el-form-item {
-  margin-bottom: 0;
-}
+// .el-form-item {
+//   margin-bottom: 0;
+// }
 .left_form {
   margin-left: 10px;
 }

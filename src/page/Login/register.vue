@@ -1,3 +1,5 @@
+/* eslint-disable no-unreachable */
+/* eslint-disable no-unreachable */
 <template>
   <div class="login v2">
     <div class="wrapper">
@@ -22,6 +24,7 @@
                   class="inputMsg"
                   v-model="ruleForm.username"
                   autoComplete="off"
+                  placeholder="请输入用户名"
                 >
                 </el-input>
               </el-form-item>
@@ -32,6 +35,7 @@
                   type="password"
                   v-model="ruleForm.password"
                   autoComplete="off"
+                  placeholder="请输入密码"
                 ></el-input>
               </el-form-item>
               <el-form-item label="手机号" prop="mobile">
@@ -47,6 +51,7 @@
                   clearable
                   v-model.number="ruleForm.verifyCode"
                   style="width: 60%;"
+                  placeholder="请输入验证码"
                 ></el-input>
                 <el-button
                   class="smsMsg"
@@ -88,6 +93,18 @@
                 <el-button @click="resetForm('ruleForm')">重置</el-button>
               </el-form-item>
             </el-form>
+            <div class="border" style="margin-bottom: 10px;"></div>
+            <ul class="common-form pr">
+              <!-- <li class="pa" style="left: 0;top: 0;margin: 0;color: #d44d44">{{registered.errMsg}}</li> -->
+              <li
+                style="text-align: center;line-height: 48px;margin-bottom: 0;font-size: 12px;color: #999;"
+              >
+                <span>如果您已拥有 三济生物 账号，则可在此</span>
+                <a href="javascript:;" style="margin: 0 5px" @click="toLogin"
+                  >登陆</a
+                >
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -113,7 +130,7 @@ export default {
       btntxt: '重新发送',
       checked: true,
       keyWord: '', // 搜索关键字
-      // username: localStorage.getItem('username'), // 从localStorage中获取name
+      // username: sessionStorage.getItem('username'), // 从localStorage中获取name
       // 登录弹窗字段
       dialogFormVisible: false,
       form: {
@@ -123,9 +140,9 @@ export default {
       },
       // 注册页面字段
       ruleForm: {
-        mobile: '',
-        username: '',
-        password: '',
+        mobile: '15101024057',
+        username: '11',
+        password: '11',
         verifyCode: '',
         type: []
       },
@@ -140,7 +157,9 @@ export default {
         ],
         password: [
           {
-            validator: validatePass,
+            // validator: validatePass,
+            required: true,
+            message: '请输入密码',
             trigger: 'blur'
           }
         ],
@@ -180,17 +199,16 @@ export default {
       }, 1000)
     }
     // 密码校验
-    // eslint-disable-next-line no-unreachable
-    var validatePass = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请输入密码'))
-      } else {
-        if (this.ruleForm.checkPass !== '') {
-          this.$refs.ruleForm.validateField('checkPass')
-        }
-        callback()
-      }
-    }
+    // var validatePass = (rule, value, callback) => {
+    //   if (value === '') {
+    //     callback(new Error('请输入密码'))
+    //   } else {
+    //     if (this.ruleForm.checkPass !== '') {
+    //       this.$refs.ruleForm.validateField('checkPass')
+    //     }
+    //     callback()
+    //   }
+    // }
   },
   computed: {
     count () {
@@ -208,7 +226,7 @@ export default {
           // axios带着用户信息 去到 后端数据库校验
           axios
             .post(
-              '/benchApi/login',
+              '/front/login',
               qs.stringify({
                 username: this.form.username,
                 password: this.form.password
@@ -241,15 +259,15 @@ export default {
     },
     // 注销操作
     logout () {
-      // 移除localStorage中的token
-      localStorage.removeItem('token')
+      // 移除sessionStorage中的token
+      sessionStorage.removeItem('token')
       // 清空username 的数据
       this.form.username = null
     },
     // 手机验证发送验证码
     sendcode () {
       const reg = 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/
-      var url = '/benchApi/verifyCode/' + this.ruleForm.mobile
+      var url = '/front/verifyCode/' + this.ruleForm.mobile
       if (this.ruleForm.mobile === '') {
         this.$message({
           message: '手机号不能为空',
@@ -308,6 +326,11 @@ export default {
     // 重置注册
     resetForm (formName) {
       this.$refs[formName].resetFields()
+    },
+    toLogin () {
+      this.$router.push({
+        path: '/login'
+      })
     }
   },
   mounted () {},
@@ -370,11 +393,12 @@ export default {
     overflow: visible;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
     position: relative;
-    background-image: url(/static/images/smartisan_4ada7fecea.png);
+    // background-image: url(/static/images/smartisan_4ada7fecea.png);
+    background-image: url(/static/images/smartisan_4ada7fecea.jpg);
     background-size: 140px;
     background-position: top center;
     background-repeat: no-repeat;
-    height: 92px;
+    // height: 92px;
     margin: 23px 0 50px;
     padding: 75px 0 0;
     box-shadow: none;

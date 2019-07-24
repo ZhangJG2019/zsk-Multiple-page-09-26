@@ -29,9 +29,12 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/front': {
-        target: 'http://192.168.1.66:8883'
-        // target: 'http: //47.104.168.172:8084'
-
+        target: 'http://192.168.1.66:8883',
+        // target: 'http: //47.104.168.172:8084',
+        changeOrigin: true,
+        // pathRewrite: {
+        //   '^/front': '/' //通过pathRewrite重写地址，将前缀/front转为/
+        // }
       }
     },
 

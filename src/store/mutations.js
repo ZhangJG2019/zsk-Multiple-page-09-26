@@ -8,7 +8,10 @@ import {
   REDUCE_CART,
   EDIT_CART
 } from './mutation-types'
-import { setStore, getStore } from '../utils/storage'
+import {
+  setStore,
+  getStore
+} from '../utils/storage'
 export default {
   // 网页初始化时从本地缓存获取购物车数据
   [INIT_BUYCART] (state) {
@@ -18,7 +21,13 @@ export default {
     }
   },
   // 加入购物车
-  [ADD_CART] (state, {productId, salePrice, productName, productImg, productNum = 1}) {
+  [ADD_CART] (state, {
+    productId,
+    salePrice,
+    productName,
+    productImg,
+    productNum = 1
+  }) {
     let cart = state.cartList // 购物车
     let falg = true
     let goods = {
@@ -27,7 +36,7 @@ export default {
       productName,
       productImg
     }
-    if (cart.length) {        // 有内容
+    if (cart.length) { // 有内容
       cart.forEach(item => {
         if (item.productId === productId) {
           if (item.productNum >= 0) {
@@ -47,7 +56,15 @@ export default {
     setStore('buyCart', cart)
   },
   // 加入购物车动画
-  [ADD_ANIMATION] (state, {moveShow, elLeft, elTop, img, cartPositionT, cartPositionL, receiveInCart}) {
+  [ADD_ANIMATION] (state, {
+    moveShow,
+    elLeft,
+    elTop,
+    img,
+    cartPositionT,
+    cartPositionL,
+    receiveInCart
+  }) {
     state.showMoveImg = moveShow
     if (elLeft) {
       state.elLeft = elLeft
@@ -61,7 +78,9 @@ export default {
     }
   },
   // 是否显示购物车
-  [SHOW_CART] (state, {showCart}) {
+  [SHOW_CART] (state, {
+    showCart
+  }) {
     // let timer = null
     state.showCart = showCart
     // clearTimeout(timer)
@@ -72,7 +91,9 @@ export default {
     // }
   },
   // 移除商品
-  [REDUCE_CART] (state, {productId}) {
+  [REDUCE_CART] (state, {
+    productId
+  }) {
     let cart = state.cartList
     cart.forEach((item, i) => {
       if (item.productId === productId) {
@@ -88,7 +109,11 @@ export default {
     setStore('buyCart', state.cartList)
   },
   // 修改购物车
-  [EDIT_CART] (state, {productId, productNum, checked}) {
+  [EDIT_CART] (state, {
+    productId,
+    productNum,
+    checked
+  }) {
     let cart = state.cartList
     if (productNum) {
       cart.forEach((item, i) => {
@@ -109,7 +134,7 @@ export default {
       })
     }
     state.cartList = cart
-    // 存入localStorage
+    // 存入sessionStorage
     setStore('buyCart', state.cartList)
   },
   // 记录用户信息
@@ -127,7 +152,9 @@ export default {
       return
     }
     if (!info.message) {
-      state.userInfo = {...info}
+      state.userInfo = {
+        ...info
+      }
     } else {
       state.userInfo = null
     }
