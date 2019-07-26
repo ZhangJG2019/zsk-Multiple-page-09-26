@@ -3,34 +3,12 @@ import http from './public'
 export const getAllGoods = (params) => {
   return http.fetchGet('/front/goods/allGoods', params)
 }
-// 获取购物车列表
-export const getCartList = (params) => {
-  return http.fetchPost('/front/member/cartList', params)
-}
-// 加入购物车
-export const addCart = (params) => {
-  return http.fetchPost('/front/member/addCart', params)
-}
-// 删除购物车
-export const delCart = (params) => {
-  return http.fetchPost('/front/member/delCart', params)
-}
-// 删除购物车勾选商品
-export const delCartChecked = (params) => {
-  return http.fetchPost('/front/member/delCartChecked', params)
-}
-// 编辑购物车
-export const cartEdit = (params) => {
-  return http.fetchPost('/front/member/cartEdit', params)
-}
+
 // 全选
 export const editCheckAll = (params) => {
   return http.fetchPost('/front/member/editCheckAll', params)
 }
-// 删除整条购物车
-export const cartDel = (params) => {
-  return http.fetchPost('/front/member/cartDel', params)
-}
+
 // 获取用户地址
 export const addressList = (params) => {
   return http.fetchPost('/front/member/addressList', params)
@@ -39,10 +17,7 @@ export const addressList = (params) => {
 export const getAddress = (params) => {
   return http.fetchPost('/front/member/address', params)
 }
-// 修改收货地址
-export const addressUpdate = (params) => {
-  return http.fetchPost('/front/member/updateAddress', params)
-}
+
 // 添加收货地址
 export const addressAdd = (params) => {
   return http.fetchPost('/front/member/addAddress', params)

@@ -49,8 +49,8 @@
               <el-form-item label="验证码" prop="verifyCode">
                 <el-input
                   clearable
-                  v-model.number="ruleForm.verifyCode"
-                  style="width: 60%;"
+                  v-model="ruleForm.verifyCode"
+                  style="width: 50%;"
                   placeholder="请输入验证码"
                 ></el-input>
                 <el-button
@@ -116,6 +116,7 @@
 <script>
 import YFooter from '/common/footer'
 import YButton from '/components/YButton'
+import { regist } from '/api/index.js'
 // require('../../../static/geetest/gt.js')
 import 'element-ui'
 // import $ from 'jquery'
@@ -142,8 +143,8 @@ export default {
       // 注册页面字段
       ruleForm: {
         mobile: '15101024057',
-        username: '11',
-        password: '11',
+        username: '',
+        password: '',
         verifyCode: '',
         type: []
       },
@@ -165,10 +166,7 @@ export default {
           }
         ],
         verifyCode: [
-          {
-            validator: checkSendcode,
-            trigger: 'blur'
-          }
+          { required: true, message: '请输入手机验证码', trigger: 'blur' }
         ],
         type: [
           {
@@ -181,35 +179,6 @@ export default {
       },
       formLabelWidth: '1px'
     }
-    // 发送验证码校验
-    // eslint-disable-next-line no-unreachable
-    var checkSendcode = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error('验证码不能为空'))
-      }
-      setTimeout(() => {
-        if (!Number.isInteger(value)) {
-          callback(new Error('请输入数字值'))
-        } else {
-          if (value !== 6) {
-            callback(new Error('请输入正确验证码'))
-          } else {
-            callback()
-          }
-        }
-      }, 1000)
-    }
-    // 密码校验
-    // var validatePass = (rule, value, callback) => {
-    //   if (value === '') {
-    //     callback(new Error('请输入密码'))
-    //   } else {
-    //     if (this.ruleForm.checkPass !== '') {
-    //       this.$refs.ruleForm.validateField('checkPass')
-    //     }
-    //     callback()
-    //   }
-    // }
   },
   computed: {
     count() {
@@ -315,10 +284,26 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          alert('注册成功!')
-          this.sizeForm = { brand_right: 0 }
+          let data = new FormData()
+          data.append('username', this.ruleForm.username)
+          data.append('password', this.ruleForm.password)
+          data.append('mobile', this.ruleForm.mobile)
+          data.append('verifyCode', this.ruleForm.verifyCode)
+          regist(data)
+            .then(res => {
+              console.log(res)
+              debugger
+              return this.$message({
+                message: res.data.message,
+                type: 'success'
+              })
+              // alert('注册成功!')
+              this.sizeForm = { brand_right: 0 }
+            })
+            .catch(res => {
+              console.log('注册失败!!')
+            })
         } else {
-          console.log('注册失败!!')
           return false
         }
       })

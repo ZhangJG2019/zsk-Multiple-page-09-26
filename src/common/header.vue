@@ -40,23 +40,23 @@
                     <ul>
                       <!--头像-->
                       <li class="nav-user-avatar">
-                        <div>
+                        <!-- <div>
                           <span
                             class="avatar"
                             :style="{
-                              backgroundImage: 'url(' + userInfo.info.file + ')'
+                              backgroundImage: 'url(' + userInfo + ')'
                             }"
                           >
                           </span>
-                        </div>
-                        <p class="name">{{ userInfo.info.username }}</p>
+                        </div> -->
+                        <p class="name">{{ userInfo.info.name }}</p>
                       </li>
 
-                      <li>
+                      <!-- <li>
                         <router-link to="/user/information"
                           >账号资料</router-link
                         >
-                      </li>
+                      </li> -->
 
                       <li>
                         <a href="javascript:;" @click="_loginOut">退出</a>
@@ -112,7 +112,7 @@
 <script>
 import YButton from '/components/YButton'
 import { mapMutations, mapState } from 'vuex'
-import { getCartList, cartDel, getQuickSearch } from '/api/goods'
+// import { getCartList, cartDel, getQuickSearch } from '/api/goods'
 // import { loginOut, navList } from '/api/index'
 import { loginOut } from '/api/index'
 import { setStore, getStore, removeStore } from '/utils/storage'
@@ -138,25 +138,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['cartList', 'login', 'receiveInCart', 'showCart', 'userInfo']),
-    // 计算价格
-    totalPrice() {
-      var totalPrice = 0
-      this.cartList &&
-        this.cartList.forEach(item => {
-          totalPrice += item.productNum * item.salePrice
-        })
-      return totalPrice
-    },
-    // 计算数量
-    totalNum() {
-      var totalNum = 0
-      this.cartList &&
-        this.cartList.forEach(item => {
-          totalNum += item.productNum
-        })
-      return totalNum
-    }
+    ...mapState(['cartList', 'login', 'receiveInCart', 'showCart', 'userInfo'])
   },
   methods: {
     ...mapMutations([
@@ -168,6 +150,7 @@ export default {
       'RECORD_USERINFO',
       'EDIT_CART'
     ]),
+    // 查询信息
     handleIconClick(ev) {
       if (this.$route.path === '/search') {
         this.$router.push({
@@ -265,21 +248,7 @@ export default {
     handleSelect(item) {
       this.input = item.value
     },
-    // 购物车显示
-    cartShowState(state) {
-      this.SHOW_CART({ showCart: state })
-    },
-    // 登陆时获取一次购物车商品
-    _getCartList() {
-      getCartList({ userId: getStore('userId') })
-        .then(res => {
-          if (res.success === true) {
-            setStore('buyCart', res.result)
-          }
-          // 重新初始化一次本地数据
-        })
-        .then(this.INIT_BUYCART)
-    },
+
     // 删除商品
     delGoods(productId) {
       if (this.login) {
@@ -317,15 +286,15 @@ export default {
     },
     // 退出登陆
     _loginOut() {
-      let params = {
-        params: {
-          token: this.token
-        }
-      }
-      loginOut(params).then(res => {
-        removeStore('buyCart')
-        window.location.href = '/'
-      })
+      loginOut(this.activeId)
+        .then(res => {
+          removeStore('userInfo')
+          removeStore('token')
+          removeStore('rusername')
+          removeStore('rpassword')
+          window.location.href = '/'
+        })
+        .catch(res => {})
     },
     // 通过路由改变导航文字样式
     getPage() {
@@ -343,21 +312,10 @@ export default {
       window.open(
         '//' + window.location.host + '/#/goodsDetails?productId=' + productId
       )
-    },
-    _getNavList() {
-      // navList().then(res => {
-      //   this.navList = res.result
-      // })
     }
   },
   mounted() {
-    this._getNavList()
     this.token = getStore('token')
-    if (this.login) {
-      this._getCartList()
-    } else {
-      this.INIT_BUYCART()
-    }
     this.navFixed()
     this.getPage()
     window.addEventListener('scroll', this.navFixed)

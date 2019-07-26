@@ -71,34 +71,40 @@ Vue.use(VueLazyload, {
   // attempt: 1
 })
 Vue.config.productionTip = false
-const whiteList = ['/home', '/goods', '/login', '/register', '/goodsDetails', '/thanks', '/search', '/refreshsearch', '/refreshgoods'] // 不需要登陆的页面
+const whiteList = ['/home', '/goods', '/login', '/register', '/goodsDetails', '/search', '/refreshsearch', '/refreshgoods'] // 不需要登陆的页面
 router.beforeEach(function (to, from, next) {
-  let params = {
-    params: {
-      token: getStore('token')
+  if (getStore('token')) {
+    let params = {
+      params: {
+        token: getStore('token')
+      }
+    }
+    userInfo(params).then(res => {
+      if (res && res.data) {
+        store.commit('RECORD_USERINFO', {
+          info: res.data.user
+        })
+        if (to.path === '/login') { //  跳转到
+          next({
+            path: '/'
+          })
+        }
+        next()
+      } else {
+        if (whiteList.indexOf(to.path) !== -1) { // 白名单,如果在白名单中，就免登录
+          next()
+        } else { // 如果不在白名单中， 就跳转到登录页面
+          next('/login')
+        }
+      }
+    })
+  } else {
+    if (whiteList.indexOf(to.path) !== -1) { // 白名单,如果在白名单中，就免登录
+      next()
+    } else { // 如果不在白名单中， 就跳转到登录页面
+      next('/login')
     }
   }
-  userInfo(params).then(res => {
-    debugger
-    console.log(res)
-    if (res !== 1) { // 没登录！==
-      if (whiteList.indexOf(to.path) !== -1) { // 白名单,如果在白名单中，就免登录
-        next()
-      } else { // 如果不在白名单中， 就跳转到登录页面
-        next('/login')
-      }
-    } else {
-      store.commit('RECORD_USERINFO', {
-        info: res.result
-      })
-      if (to.path === '/login') { //  跳转到
-        next({
-          path: '/'
-        })
-      }
-      next()
-    }
-  })
 })
 /* eslint-disable no-new */
 new Vue({

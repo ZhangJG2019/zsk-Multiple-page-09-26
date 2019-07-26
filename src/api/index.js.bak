@@ -5,7 +5,7 @@ export const userLogin = (params) => {
 }
 // 退出登陆
 export const loginOut = (params) => {
-  return http.fetchGet('/member/loginOut', params)
+  return http.fetchGet('/member/logout', params)
 }
 // 用户信息
 export const userInfo = (params) => {
@@ -23,10 +23,7 @@ export const upload = (params) => {
 export const updateheadimage = (params) => {
   return http.fetchPost('/member/updateheadimage', params)
 }
-// 捐赠列表
-export const thanksList = (params) => {
-  return http.fetchGet('/member/thanks', params)
-}
+
 // 首页接口
 export const productHome = (params) => {
   return http.fetchGet('/goods/home', params)

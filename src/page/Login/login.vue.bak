@@ -133,21 +133,7 @@ export default {
     login_back () {
       this.$router.go(-1)
     },
-    // 登陆时将本地的添加到用户购物车
-    login_addCart () {
-      let cartArr = []
-      let locaCart = JSON.parse(getStore('buyCart'))
-      if (locaCart && locaCart.length) {
-        locaCart.forEach(item => {
-          cartArr.push({
-            userId: getStore('userId'),
-            productId: item.productId,
-            productNum: item.productNum
-          })
-        })
-      }
-      this.cart = cartArr
-    },
+    
     login () {
       this.logintxt = '登录中...'
       this.rememberPass()
@@ -183,7 +169,6 @@ export default {
                 }
               })
             }
-            removeStore('buyCart')
             this.$router.push({
               path: '/'
             })

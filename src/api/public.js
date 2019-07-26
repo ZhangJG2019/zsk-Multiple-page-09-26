@@ -1,6 +1,7 @@
 import axios from 'axios'
 axios.defaults.timeout = 10000
 axios.defaults.headers.post['Content-Type'] = 'application/x-www=form-urlencoded'
+// axios.defaults.headers.post['Content-Type'] = 'multipart/form-data'
 axios.defaults.headers.common['Authentication-Token'] = window.localStorage.token
 export default {
   fetchGet(url, params = {}) {

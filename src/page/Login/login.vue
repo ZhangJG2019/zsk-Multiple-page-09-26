@@ -1,4 +1,6 @@
 /* eslint-disable no-debugger */
+/* eslint-disable no-debugger */
+/* eslint-disable no-debugger */
 <template>
   <div class="login v2">
     <div class="wrapper">
@@ -78,15 +80,7 @@
             </y-button>
           </div>
           <div class="border"></div>
-          <div class="footer">
-            <!-- <div class="other">其它账号登录：</div>
-            <a
-              ><img
-                @click="open('待开发', '此功能开发中...')"
-                style="height: 15px; margin-top: 22px;"
-                src="/static/images/other-login.png"
-            /></a> -->
-          </div>
+          <div class="footer"></div>
         </div>
       </div>
     </div>
@@ -102,7 +96,7 @@ import { userLogin } from '/api/index.js'
 import { setStore, getStore, removeStore } from '/utils/storage.js'
 // require('../../../static/geetest/gt.js')
 // var captcha
-import qs from 'qs'
+// import qs from 'qs'
 export default {
   data() {
     return {
@@ -144,7 +138,8 @@ export default {
     },
     message(m) {
       this.$message.error({
-        message: m
+        message: m,
+        type: 'error'
       })
     },
     getRemembered() {
@@ -175,23 +170,8 @@ export default {
     login_back() {
       this.$router.go(-1)
     },
-    // 登陆时将本地的添加到用户购物车
-    login_addCart() {
-      let cartArr = []
-      let locaCart = JSON.parse(getStore('buyCart'))
-      if (locaCart && locaCart.length) {
-        locaCart.forEach(item => {
-          cartArr.push({
-            userId: getStore('userId'),
-            productId: item.productId,
-            productNum: item.productNum
-          })
-        })
-      }
-      this.cart = cartArr
-    },
+
     login() {
-      console.log(window.localStorage)
       this.logintxt = '登录中...'
       this.rememberPass()
       if (!this.ruleForm.userName || !this.ruleForm.userPwd) {
@@ -199,63 +179,44 @@ export default {
         this.message('账号或者密码不能为空!')
         return false
       }
-      var params = {
-        userName: this.ruleForm.userName,
-        userPwd: this.ruleForm.userPwd
-      }
-      // eslint-disable-next-line no-debugger
-      debugger
-      var a = qs.stringify(params)
-      userLogin(a)
+
+      let data = new FormData()
+      data.append('username', this.ruleForm.userName)
+      data.append('password', this.ruleForm.userPwd)
+      userLogin(data)
         .then(res => {
-          if (res.status === 200) {
-            window.sessionStorage.setItem('token', res.token)
-            return this.$message.success(res.data.message)
+          if (res.data !== null && res.data.user !== null) {
+            setStore('token', res.data.token)
+            setStore('userId', res.data.user.id)
+            setStore('activeId', res.data.user.activeId)
+            this.$message({
+              message: res.message,
+              type: 'success'
+            })
+            return this.$router.push({
+              path: '/'
+            })
           } else {
+            this.logintxt = '登录'
             return this.$message.error(res.message)
           }
-          // return this.$message.success('登录成功')
         })
         .catch(res => {
           // eslint-disable-next-line no-debugger
-          debugger
+
           if (res.response === null) {
-          }
-          if (res.response.data == null) {
             return this.$message.error('发送异常，登录失败')
           } else {
-            return this.$message.error(res.response.data.message)
+            return this.$message.error('发生其他异常')
           }
         })
     }
-    // init_geetest () {
-    //   geetest().then(res => {
-    //     this.statusKey = res.statusKey
-    //     window.initGeetest(
-    //       {
-    //         gt: res.gt,
-    //         challenge: res.challenge,
-    //         new_captcha: res.new_captcha,
-    //         offline: !res.success,
-    //         product: 'popup',
-    //         width: '100%'
-    //       }
-    //       // function (captchaObj) {
-    //       //   captcha = captchaObj
-    //       //   captchaObj.appendTo('#captcha')
-    //       //   captchaObj.onReady(function () {
-    //       //     document.getElementById('wait').style.display = 'none'
-    //       //   })
-    //       // }
-    //     )
-    //   })
-    // }
   },
   mounted() {
     this.getRemembered()
-    this.login_addCart()
+    // this.login_addCart()
     // this.init_geetest()
-    this.open('登录提示', '测试体验账号密码：test | test')
+    this.open('登录提示', '测试体验账号密码：admin | 123456')
   },
   components: {
     YFooter,
