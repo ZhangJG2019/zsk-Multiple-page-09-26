@@ -205,9 +205,9 @@ export default {
           // eslint-disable-next-line no-debugger
 
           if (res.response === null) {
-            return this.$message.error('发送异常，登录失败')
+            return this.$message.error('发送异常，登录失败2222')
           } else {
-            return this.$message.error('发生其他异常')
+            return this.$message.error('本地发生其他异常666')
           }
         })
     }

@@ -49,7 +49,7 @@
                           >
                           </span>
                         </div> -->
-                        <p class="name">{{ userInfo.info.name }}</p>
+                        <p class="name">{{ userInfo.info.username }}</p>
                       </li>
 
                       <!-- <li>

@@ -142,7 +142,7 @@ export default {
       },
       // 注册页面字段
       ruleForm: {
-        mobile: '15101024057',
+        mobile: '15153683400',
         username: '',
         password: '',
         verifyCode: '',
@@ -292,16 +292,20 @@ export default {
           regist(data)
             .then(res => {
               console.log(res)
-              debugger
-              return this.$message({
-                message: res.data.message,
+              this.$message({
+                message: res.message,
                 type: 'success'
               })
+              window.location.href = '/login'
+              return
               // alert('注册成功!')
-              this.sizeForm = { brand_right: 0 }
+              // this.sizeForm = { brand_right: 0 }
             })
             .catch(res => {
-              console.log('注册失败!!')
+              this.$message({
+                message: res.message,
+                type: 'error'
+              })
             })
         } else {
           return false
