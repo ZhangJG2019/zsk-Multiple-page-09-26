@@ -111,17 +111,18 @@
     </div>
   </div>
 </template>
-<script src="../../../static/geetest/gt.js"></script>
+<!--<script src="../../../static/geetest/gt.js"></script>--> 
+
 <script>
 import YFooter from '/common/footer'
 import YButton from '/components/YButton'
-require('../../../static/geetest/gt.js')
+// require('../../../static/geetest/gt.js')
 import 'element-ui'
 // import $ from 'jquery'
 import axios from 'axios'
 import qs from 'qs'
 export default {
-  data () {
+  data() {
     return {
       loginPage: true,
       disabled: false,
@@ -130,7 +131,7 @@ export default {
       btntxt: '重新发送',
       checked: true,
       keyWord: '', // 搜索关键字
-      // username: sessionStorage.getItem('username'), // 从localStorage中获取name
+      // username: localStorage.getItem('username'), // 从localStorage中获取name
       // 登录弹窗字段
       dialogFormVisible: false,
       form: {
@@ -211,12 +212,12 @@ export default {
     // }
   },
   computed: {
-    count () {
+    count() {
       return this.$store.state.login
     }
   },
   methods: {
-    login () {
+    login() {
       // 对登录的form表单进行整体校验
       // this.$refs.loginFormRef.validate(function(valid){})
       this.$refs.loginFormRef.validate(valid => {
@@ -234,7 +235,7 @@ export default {
             )
             .then(res => {
               if (res.status === 200) {
-                window.sessionStorage.setItem('token', res.token)
+                window.localStorage.setItem('token', res.token)
                 return this.$message.success(res.data.message)
               } else {
                 return this.$message.error(res.message)
@@ -258,14 +259,14 @@ export default {
       })
     },
     // 注销操作
-    logout () {
+    logout() {
       // 移除sessionStorage中的token
-      sessionStorage.removeItem('token')
+      localStorage.removeItem('token')
       // 清空username 的数据
       this.form.username = null
     },
     // 手机验证发送验证码
-    sendcode () {
+    sendcode() {
       const reg = 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/
       var url = '/front/verifyCode/' + this.ruleForm.mobile
       if (this.ruleForm.mobile === '') {
@@ -299,7 +300,7 @@ export default {
       }
     },
     // 60S倒计时
-    timer () {
+    timer() {
       if (this.time > 0) {
         this.time--
         this.btntxt = this.time + 's后重新获取'
@@ -311,7 +312,7 @@ export default {
       }
     },
     // 提交注册表单 1
-    submitForm (formName) {
+    submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
           alert('注册成功!')
@@ -324,16 +325,16 @@ export default {
     },
     // 提交注册表单 2
     // 重置注册
-    resetForm (formName) {
+    resetForm(formName) {
       this.$refs[formName].resetFields()
     },
-    toLogin () {
+    toLogin() {
       this.$router.push({
         path: '/login'
       })
     }
   },
-  mounted () {},
+  mounted() {},
   components: {
     YFooter,
     YButton
@@ -494,10 +495,7 @@ export default {
     left: 2px;
     color: #999;
   }
-  .register {
-    padding: 1px 10px 0;
-    border-right: 1px solid #ccc;
-  }
+
   .border {
     margin-top: 10px;
     border-bottom: 1px solid #ccc;

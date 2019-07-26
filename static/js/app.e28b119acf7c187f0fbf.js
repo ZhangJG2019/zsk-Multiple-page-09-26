@@ -246,13 +246,13 @@ webpackJsonp([26], {
     var o = e(119),
       A = e.n(o),
       u = function (n, t) {
-        n && ('string' !== typeof t && (t = A()(t)), window.sessionStorage.setItem(n, t))
+        n && ('string' !== typeof t && (t = A()(t)), window.localStorage.setItem(n, t))
       },
       r = function (n) {
-        if (n) return window.sessionStorage.getItem(n)
+        if (n) return window.localStorage.getItem(n)
       },
       i = function (n) {
-        n && window.sessionStorage.removeItem(n)
+        n && window.localStorage.removeItem(n)
       }
   },
   42: function (n, t, e) {

@@ -1,329 +1,293 @@
 <template>
   <div class="home">
-    <div
+    <!-- <div
       v-loading="loading"
       element-loading-text="加载中..."
       style="min-height: 35vw;"
       v-if="!error"
-    >
-      <div v-for="(item, i) in home" :key="i">
-        <div class="activity-panel" v-if="item.type === 0">
-          <ul class="box">
-            <!-- 左侧内容区域  start-->
-            <li class="side-left left" style="margin-right:10px;">
-              <div class="side_left fl">
-                <!-- 最新事件 -->
-                <div class="w326 news mb15" style="width:326px;">
-                  <h2>
-                    <a href=""><strong>最新事件</strong></a>
-                  </h2>
-                  <ul class="left_ul left_content">
-                    <!--<li v-for="(item, key) in topNews" :key="key"> 
+    > -->
+    <!-- <div v-for="(item, i) in home" :key="i"> -->
+    <div class="activity-panel">
+      <ul class="box">
+        <!-- 左侧内容区域  start-->
+        <li class="side-left left" style="margin-right:10px;">
+          <div class="side_left fl">
+            <!-- 最新事件 -->
+            <div class="w326 news mb15" style="width:326px;">
+              <h2>
+                <a href=""><strong>最新事件</strong></a>
+              </h2>
+              <ul class="left_ul left_content">
+                <!--<li v-for="(item, key) in topNews" :key="key"> 
                             <span>{{date | formatDate}}</span>
                             <a href="" v-text="n.title"></a> 
                         </li> -->
-                    <li>
-                      <span>{{ date | formatDate }}</span
-                      ><a href="####">社会主义接班人团结友善敬业</a>
-                    </li>
-                    <li>
-                      <span>{{ date | formatDate }}</span
-                      ><a href="####">社会主义接班人团结友善敬业</a>
-                    </li>
-                    <li>
-                      <span>{{ date | formatDate }}</span
-                      ><a href="####">社会主义接班人团结友善敬业</a>
-                    </li>
-                    <li>
-                      <span>{{ date | formatDate }}</span
-                      ><a href="####">社会主义接班人团结友善敬业</a>
-                    </li>
-                    <li>
-                      <span>{{ date | formatDate }}</span
-                      ><a href="####">社会主义接班人团结友善敬业</a>
-                    </li>
-                    <li>
-                      <span>{{ date | formatDate }}</span
-                      ><a href="####">社会主义接班人团结友善敬业</a>
-                    </li>
-                    <li>
-                      <span>{{ date | formatDate }}</span
-                      ><a href="####">社会主义接班人团结友善敬业</a>
-                    </li>
-                    <li>
-                      <span>{{ date | formatDate }}</span
-                      ><a href="####">社会主义接班人团结友善敬业</a>
-                    </li>
-                    <!-- <li v-for="(item, key) in itemlis" :key="key">
+                <li>
+                  <span>{{ date | formatDate }}</span
+                  ><a href="####">社会主义接班人团结友善敬业</a>
+                </li>
+                <li>
+                  <span>{{ date | formatDate }}</span
+                  ><a href="####">社会主义接班人团结友善敬业</a>
+                </li>
+                <li>
+                  <span>{{ date | formatDate }}</span
+                  ><a href="####">社会主义接班人团结友善敬业</a>
+                </li>
+                <li>
+                  <span>{{ date | formatDate }}</span
+                  ><a href="####">社会主义接班人团结友善敬业</a>
+                </li>
+                <li>
+                  <span>{{ date | formatDate }}</span
+                  ><a href="####">社会主义接班人团结友善敬业</a>
+                </li>
+                <li>
+                  <span>{{ date | formatDate }}</span
+                  ><a href="####">社会主义接班人团结友善敬业</a>
+                </li>
+                <li>
+                  <span>{{ date | formatDate }}</span
+                  ><a href="####">社会主义接班人团结友善敬业</a>
+                </li>
+                <li>
+                  <span>{{ date | formatDate }}</span
+                  ><a href="####">社会主义接班人团结友善敬业</a>
+                </li>
+                <!-- <li v-for="(item, key) in itemlis" :key="key">
                             {{ item.title }}
                         </li> -->
-                  </ul>
-                </div>
-                <!-- 最新研究内容 -->
-                <div class="w326 news" style="width:326px;margin-top:18px">
-                  <h2>
-                    <a href=""><strong>最新研究内容</strong></a>
-                  </h2>
-                  <ul id="newlog" class="left_content">
-                    <!-- <li class="odd"> <div v-text="n.id" class="new_content "></div><a href="" v-text="n.title"></a> </li> -->
-                    <li>
-                      <div class="new_content ">1</div>
-                      <a href=""
-                        >富强民主文明和谐自由平等公正法治爱国敬业诚信友善</a
-                      >
-                    </li>
-                    <li>
-                      <div class="new_content ">2</div>
-                      <a href=""
-                        >富强民主文明和谐自由平等公正法治爱国敬业诚信友善</a
-                      >
-                    </li>
-                    <li>
-                      <div class="new_content ">3</div>
-                      <a href=""
-                        >富强民主文明和谐自由平等公正法治爱国敬业诚信友善</a
-                      >
-                    </li>
-                    <li>
-                      <div class="new_content ">4</div>
-                      <a href=""
-                        >富强民主文明和谐自由平等公正法治爱国敬业诚信友善</a
-                      >
-                    </li>
-                    <li>
-                      <div class="new_content ">5</div>
-                      <a href=""
-                        >富强民主文明和谐自由平等公正法治爱国敬业诚信友善</a
-                      >
-                    </li>
-                    <li>
-                      <div class="new_content ">6</div>
-                      <a href=""
-                        >富强民主文明和谐自由平等公正法治爱国敬业诚信友善</a
-                      >
-                    </li>
-                    <li>
-                      <div class="new_content ">7</div>
-                      <a href=""
-                        >富强民主文明和谐自由平等公正法治爱国敬业诚信友善</a
-                      >
-                    </li>
-                    <li>
-                      <div class="new_content ">8</div>
-                      <a href=""
-                        >富强民主文明和谐自由平等公正法治爱国敬业诚信友善</a
-                      >
-                    </li>
-                    <li>
-                      <div class="new_content ">9</div>
-                      <a href=""
-                        >富强民主文明和谐自由平等公正法治爱国敬业诚信友善</a
-                      >
-                    </li>
-                  </ul>
-                </div>
+              </ul>
+            </div>
+            <!-- 最新研究内容 -->
+            <div class="w326 news" style="width:326px;margin-top:18px">
+              <h2>
+                <a href=""><strong>最新研究内容</strong></a>
+              </h2>
+              <ul id="newlog" class="left_content">
+                <!-- <li class="odd"> <div v-text="n.id" class="new_content "></div><a href="" v-text="n.title"></a> </li> -->
+                <li>
+                  <div class="new_content ">1</div>
+                  <a href=""
+                    >富强民主文明和谐自由平等公正法治爱国敬业诚信友善</a
+                  >
+                </li>
+                <li>
+                  <div class="new_content ">2</div>
+                  <a href=""
+                    >富强民主文明和谐自由平等公正法治爱国敬业诚信友善</a
+                  >
+                </li>
+                <li>
+                  <div class="new_content ">3</div>
+                  <a href=""
+                    >富强民主文明和谐自由平等公正法治爱国敬业诚信友善</a
+                  >
+                </li>
+                <li>
+                  <div class="new_content ">4</div>
+                  <a href=""
+                    >富强民主文明和谐自由平等公正法治爱国敬业诚信友善</a
+                  >
+                </li>
+                <li>
+                  <div class="new_content ">5</div>
+                  <a href=""
+                    >富强民主文明和谐自由平等公正法治爱国敬业诚信友善</a
+                  >
+                </li>
+                <li>
+                  <div class="new_content ">6</div>
+                  <a href=""
+                    >富强民主文明和谐自由平等公正法治爱国敬业诚信友善</a
+                  >
+                </li>
+                <li>
+                  <div class="new_content ">7</div>
+                  <a href=""
+                    >富强民主文明和谐自由平等公正法治爱国敬业诚信友善</a
+                  >
+                </li>
+                <li>
+                  <div class="new_content ">8</div>
+                  <a href=""
+                    >富强民主文明和谐自由平等公正法治爱国敬业诚信友善</a
+                  >
+                </li>
+                <li>
+                  <div class="new_content ">9</div>
+                  <a href=""
+                    >富强民主文明和谐自由平等公正法治爱国敬业诚信友善</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <!-- 左侧内容区域  end-->
+        <!-- 中间内容区域 start -->
+        <li style="margin-right:10px">
+          <div class="slide_center fl ml20">
+            <div class="w550 news bgc_white">
+              <h2>
+                <a href="####"><strong>分类标签</strong></a>
+              </h2>
+              <ul>
+                <li class="center_content" style="background-color:#fe6181;">
+                  <img src="../../../static/images/jiyin.png" alt="" />
+                  <a href="####" class="title">基因</a><br />
+                  <a href="####" class="num">123</a>
+                </li>
+                <li class="center_content" style="background-color:#5fc46d;">
+                  <img src="../../../static/images/xianguanyaowu.png" alt="" />
+                  <a href="####" class="title">药物</a><br />
+                  <a href="####" class="num">456</a>
+                </li>
+                <li class="center_content" style="background-color:#6661d5;">
+                  <img src="../../../static/images/yaowujiyindui.png" alt="" />
+                  <a href="####" class="title">药物基因对</a><br />
+                  <a href="####" class="num">789</a>
+                </li>
+                <li class="center_content" style="background-color:#01c4c3;">
+                  <img src="../../../static/images/quanweizhinan.png" alt="" />
+                  <a href="####" class="title">权威指南</a><br />
+                  <a href="####" class="num">987</a>
+                </li>
+                <li class="center_content" style="background-color:#62b6e5;">
+                  <img src="../../../static/images/yaowubiaoqian.png" alt="" />
+                  <a href="####" class="title">药物标签</a><br />
+                  <a href="####" class="num">654</a>
+                </li>
+                <li class="center_content" style="background-color:#ff6765;">
+                  <img
+                    src="../../../static/images/linchuangzhushi.png"
+                    alt=""
+                  />
+                  <a href="####" class="title">临床注释</a><br />
+                  <a href="####" class="num">321</a>
+                </li>
+                <li class="center_content" style="background-color:#7dc691;">
+                  <img
+                    src="../../../static/images/linchuangshiyan.png"
+                    alt=""
+                    style="width:100px;height:80px"
+                  />
+                  <a href="####" class="title">临床实验</a><br />
+                  <a href="####" class="num">1314</a>
+                </li>
+                <li class="center_content" style="background-color:#feab1c;">
+                  <img src="../../../static/images/zhuanli.png" alt="" />
+                  <a href="####" class="title">专利</a><br />
+                  <a href="####" class="num">521</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <!-- 中间内容区域 end-->
+        <!-- 右侧内容区域 start-->
+        <li class="right">
+          <div class="side_left ml18">
+            <!-- 公告 -->
+            <div class="w286 news">
+              <h2>
+                <a href=""><strong>公告</strong></a>
+              </h2>
+              <ul class="right_content left_content">
+                <li><span>1</span> <a>更新说明</a></li>
+                <li><span>2</span> <a>浏览数据量</a></li>
+                <li><span>3</span> <a>导出数据量</a></li>
+                <li><span>4</span> <a>版本更新</a></li>
+                <li><span>5</span> <a>用户量/词条量</a></li>
+                <!-- <li v-for="n in topNews" class="odd"><a href="" v-text="n.title"></a></li> -->
+              </ul>
+            </div>
+            <!-- 联系 -->
+            <div class="w286 news tel h535  mt20">
+              <h2 class="w284">
+                <a href="####"><strong>联系</strong></a>
+              </h2>
+              <div class="phone contents">
+                <!-- <i class="iconfont icon-dianhua-1"></i> -->
+                <a href="####" class="phone_ul"></a>
               </div>
-            </li>
-            <!-- 左侧内容区域  end-->
-            <!-- 中间内容区域 start -->
-            <li style="margin-right:10px">
-              <div class="slide_center fl ml20">
-                <div class="w550 news bgc_white">
-                  <h2>
-                    <a href="####"><strong>分类标签</strong></a>
-                  </h2>
-                  <ul>
-                    <li
-                      class="center_content"
-                      style="background-color:#fe6181;"
-                    >
-                      <img src="../../../static/images/jiyin.png" alt="" />
-                      <a href="####" class="title">基因</a><br />
-                      <a href="####" class="num">123</a>
-                    </li>
-                    <li
-                      class="center_content"
-                      style="background-color:#5fc46d;"
-                    >
-                      <img
-                        src="../../../static/images/xianguanyaowu.png"
-                        alt=""
-                      />
-                      <a href="####" class="title">药物</a><br />
-                      <a href="####" class="num">456</a>
-                    </li>
-                    <li
-                      class="center_content"
-                      style="background-color:#6661d5;"
-                    >
-                      <img
-                        src="../../../static/images/yaowujiyindui.png"
-                        alt=""
-                      />
-                      <a href="####" class="title">药物基因对</a><br />
-                      <a href="####" class="num">789</a>
-                    </li>
-                    <li
-                      class="center_content"
-                      style="background-color:#01c4c3;"
-                    >
-                      <img
-                        src="../../../static/images/quanweizhinan.png"
-                        alt=""
-                      />
-                      <a href="####" class="title">权威指南</a><br />
-                      <a href="####" class="num">987</a>
-                    </li>
-                    <li
-                      class="center_content"
-                      style="background-color:#62b6e5;"
-                    >
-                      <img
-                        src="../../../static/images/yaowubiaoqian.png"
-                        alt=""
-                      />
-                      <a href="####" class="title">药物标签</a><br />
-                      <a href="####" class="num">654</a>
-                    </li>
-                    <li
-                      class="center_content"
-                      style="background-color:#ff6765;"
-                    >
-                      <img
-                        src="../../../static/images/linchuangzhushi.png"
-                        alt=""
-                      />
-                      <a href="####" class="title">临床注释</a><br />
-                      <a href="####" class="num">321</a>
-                    </li>
-                    <li
-                      class="center_content"
-                      style="background-color:#7dc691;"
-                    >
-                      <img
-                        src="../../../static/images/linchuangshiyan.png"
-                        alt=""
-                        style="width:100px;height:80px"
-                      />
-                      <a href="####" class="title">临床实验</a><br />
-                      <a href="####" class="num">1314</a>
-                    </li>
-                    <li
-                      class="center_content"
-                      style="background-color:#feab1c;"
-                    >
-                      <img src="../../../static/images/zhuanli.png" alt="" />
-                      <a href="####" class="title">专利</a><br />
-                      <a href="####" class="num">521</a>
-                    </li>
-                  </ul>
-                </div>
+              <div class="email contents">
+                <!-- <i class="iconfont icon-huaban-"></i> -->
+                <a href="####" class="email_ul"></a>
               </div>
-            </li>
-            <!-- 中间内容区域 end-->
-            <!-- 右侧内容区域 start-->
-            <li class="right">
-              <div class="side_left ml18">
-                <!-- 公告 -->
-                <div class="w286 news">
-                  <h2>
-                    <a href=""><strong>公告</strong></a>
-                  </h2>
-                  <ul class="right_content left_content">
-                    <li><span>1</span> <a>更新说明</a></li>
-                    <li><span>2</span> <a>浏览数据量</a></li>
-                    <li><span>3</span> <a>导出数据量</a></li>
-                    <li><span>4</span> <a>版本更新</a></li>
-                    <li><span>5</span> <a>用户量/词条量</a></li>
-                    <!-- <li v-for="n in topNews" class="odd"><a href="" v-text="n.title"></a></li> -->
-                  </ul>
-                </div>
-                <!-- 联系 -->
-                <div class="w286 news tel h535  mt20">
-                  <h2 class="w284">
-                    <a href="####"><strong>联系</strong></a>
-                  </h2>
-                  <div class="phone contents">
-                    <!-- <i class="iconfont icon-dianhua-1"></i> -->
-                    <a href="####" class="phone_ul"></a>
-                  </div>
-                  <div class="email contents">
-                    <!-- <i class="iconfont icon-huaban-"></i> -->
-                    <a href="####" class="email_ul"></a>
-                  </div>
-                </div>
-                <!-- 我要留言 -->
-                <div class="w286 news Message">
-                  <h2 class="w284">
-                    <a href="####"><strong>我要留言</strong></a>
-                  </h2>
-                  <div class="right_bottom">
-                    <el-form
-                      ref="form"
-                      :model="sizeForm"
-                      label-width="80px"
-                      size="large"
-                      label-position="top"
+            </div>
+            <!-- 我要留言 -->
+            <div class="w286 news Message">
+              <h2 class="w284">
+                <a href="####"><strong>我要留言</strong></a>
+              </h2>
+              <div class="right_bottom">
+                <el-form
+                  ref="form"
+                  :model="sizeForm"
+                  label-width="80px"
+                  size="large"
+                  label-position="top"
+                >
+                  <el-form-item
+                    label="昵称:"
+                    prop="name"
+                    style="font-size:18px"
+                  >
+                    <el-input
+                      v-model="sizeForm.name"
+                      placeholder="请输入您的昵称："
+                    ></el-input>
+                  </el-form-item>
+                  <el-form-item label="留言内容:" prop="textarea">
+                    <el-input
+                      v-model="sizeForm.textarea"
+                      placeholder="请输入留言内容"
+                      type="textarea"
+                      :rows="2"
                     >
-                      <el-form-item
-                        label="昵称:"
-                        prop="name"
-                        style="font-size:18px"
-                      >
-                        <el-input
-                          v-model="sizeForm.name"
-                          placeholder="请输入您的昵称："
-                        ></el-input>
-                      </el-form-item>
-                      <el-form-item label="留言内容:" prop="textarea">
-                        <el-input
-                          v-model="sizeForm.textarea"
-                          placeholder="请输入留言内容"
-                          type="textarea"
-                          :rows="2"
-                        >
-                        </el-input>
-                      </el-form-item>
-                      <el-form-item>
-                        <el-button size=" small" type="primary">提交</el-button>
-                      </el-form-item>
-                    </el-form>
-                  </div>
-                </div>
+                    </el-input>
+                  </el-form-item>
+                  <el-form-item>
+                    <el-button size=" small" type="primary">提交</el-button>
+                  </el-form-item>
+                </el-form>
               </div>
-            </li>
-            <!-- 右侧内容区域 end-->
-          </ul>
-          <!-- 业务划分区域 start -->
-          <ul class=" guide_ul">
-            <li style="background-color:#35be9b;">
-              <a href="####">
-                <i class="iconfont icon-yonghuguanli"></i>
-                <p>知识库用户</p>
-              </a>
-            </li>
-            <li style="background-color:#8bc255;">
-              <a href="####">
-                <i class="iconfont icon-xiazai-xianxing"></i>
-                <p>下载</p>
-              </a>
-            </li>
-            <li style="background-color:#56bde3;">
-              <a href="####">
-                <i class="iconfont icon-icon"></i>
-                <p>帮助</p>
-              </a>
-            </li>
-            <li style="background-color:#f78228;">
-              <a href="#/taskhall">
-                <i class="iconfont icon-woderenwu"></i>
-                <p>任务大厅</p>
-              </a>
-            </li>
-          </ul>
-          <!-- 业务划分区域 end -->
-        </div>
-      </div>
+            </div>
+          </div>
+        </li>
+        <!-- 右侧内容区域 end-->
+      </ul>
+      <!-- 业务划分区域 start -->
+      <ul class=" guide_ul">
+        <li style="background-color:#35be9b;">
+          <a href="####">
+            <i class="iconfont icon-yonghuguanli"></i>
+            <p>知识库用户</p>
+          </a>
+        </li>
+        <li style="background-color:#8bc255;">
+          <a href="####">
+            <i class="iconfont icon-xiazai-xianxing"></i>
+            <p>下载</p>
+          </a>
+        </li>
+        <li style="background-color:#56bde3;">
+          <a href="####">
+            <i class="iconfont icon-icon"></i>
+            <p>帮助</p>
+          </a>
+        </li>
+        <li style="background-color:#f78228;">
+          <a href="#/taskhall">
+            <i class="iconfont icon-woderenwu"></i>
+            <p>任务大厅</p>
+          </a>
+        </li>
+      </ul>
+      <!-- 业务划分区域 end -->
+      <!-- </div> -->
+      <!-- </div> -->
     </div>
 
     <!-- 报错提示页 1-->
@@ -338,23 +302,23 @@
   </div>
 </template>
 <script>
-import { productHome } from '/api/index.js'
+// import { productHome } from '/api/index.js'
 import YShelf from '/components/shelf'
 import product from '/components/product'
 import mallGoods from '/components/mallGoods'
-import { setStore, getStore } from '/utils/storage.js'
+// import { setStore, getStore } from '/utils/storage.js'
 // import '../../assets/icon/font/iconfont'
 // import '../../assets/icon/font2/iconfont'
 import 'element-ui'
 import $ from 'jquery'
 
 // 事件补位函数 1
-var padDate = function (value) {
+var padDate = function(value) {
   return value < 10 ? '0' + value : value
 }
 // 事件补位函数 2
 // 格式化时间函数 1
-var formatDate = function (value) {
+var formatDate = function(value) {
   // 这里的value就是需要过滤的数据
   var date = new Date(value)
   var year = date.getFullYear()
@@ -365,18 +329,18 @@ var formatDate = function (value) {
 // 格式化时间函数 2
 
 export default {
-  data () {
+  data() {
     return {
       date: new Date(),
       error: false,
-      banner: [],
-      mark: 0,
-      bgOpt: {
-        px: 0,
-        py: 0,
-        w: 0,
-        h: 0
-      },
+      // banner: [],
+      // mark: 0,
+      // bgOpt: {
+      //   px: 0,
+      //   py: 0,
+      //   w: 0,
+      //   h: 0
+      // },
       home: [],
       loading: true,
       notify: '1',
@@ -388,10 +352,10 @@ export default {
       }
     }
   },
-  mounted () {
+  mounted() {
     // 中间背景添加 1
-    function bgc (color, tagName) {
-      $(tagName).each(function (i, e) {
+    function bgc(color, tagName) {
+      $(tagName).each(function(i, e) {
         $(e).css('background-color', color[i])
       })
     }
@@ -417,21 +381,21 @@ export default {
       'bgc_white  ul li.center_content'
     )
     // 中间背景添加 2
-    productHome().then(res => {
-      if (res.success === false) {
-        this.error = true
-        return
-      }
-      let data = res.result
-      this.home = data
-      this.loading = false
-      for (let i = 0; i < data.length; i++) {
-        if (data[i].type === 0) {
-          this.banner = data[i].panelContents
-        }
-      }
-    })
-    this.showNotify()
+    // productHome().then(res => {
+    //   if (res.success === false) {
+    //     this.error = true
+    //     return
+    //   }
+    //   let data = res.result
+    //   this.home = data
+    //   this.loading = false
+    //   for (let i = 0; i < data.length; i++) {
+    //     if (data[i].type === 0) {
+    //       this.banner = data[i].panelContents
+    //     }
+    //   }
+    // })
+    // this.showNotify()
 
     // 底部无限滚动 1
     // var box = document.getElementById('box')
@@ -461,13 +425,13 @@ export default {
     // }
     // 底部无限滚动 2
     // 业务划分区域页面跳转 1
-    $('.guide_ul li').click(function () {
+    $('.guide_ul li').click(function() {
       $('a', this)[0].click()
     })
     // 业务划分区域页面跳转 2
   },
-  created () {
-    this.play()
+  created() {
+    // this.play()
   },
   components: {
     YShelf,
@@ -478,75 +442,75 @@ export default {
     formatDate: formatDate // 最新事件的时间处理函数
   },
   methods: {
-    autoPlay () {
-      this.mark++
-      if (this.mark > this.banner.length - 1) {
-        // 当遍历到最后一张图片置零
-        this.mark = 0
-      }
-    },
-    play () {
-      // 每2.5s自动切换
-      this.timer = setInterval(this.autoPlay, 2500)
-    },
-    change (i) {
-      this.mark = i
-    },
-    startTimer () {
-      this.timer = setInterval(this.autoPlay, 2500)
-    },
-    stopTimer () {
-      clearInterval(this.timer)
-    },
-    linkTo (item) {
-      if (item.type === 0 || item.type === 2) {
-        // 关联商品
-        this.$router.push({
-          path: '/goodsDetails',
-          query: {
-            productId: item.productId
-          }
-        })
-      } else {
-        // 完整链接
-        window.location.href = item.fullUrl
-      }
-    },
-    bgOver (e) {
-      this.bgOpt.px = e.offsetLeft
-      this.bgOpt.py = e.offsetTop
-      this.bgOpt.w = e.offsetWidth
-      this.bgOpt.h = e.offsetHeight
-    },
-    bgMove (dom, eve) {
-      let bgOpt = this.bgOpt
-      let X, Y
-      let mouseX = eve.pageX - bgOpt.px
-      let mouseY = eve.pageY - bgOpt.py
-      if (mouseX > bgOpt.w / 2) {
-        X = mouseX - bgOpt.w / 2
-      } else {
-        X = mouseX - bgOpt.w / 2
-      }
-      if (mouseY > bgOpt.h / 2) {
-        Y = bgOpt.h / 2 - mouseY
-      } else {
-        Y = bgOpt.h / 2 - mouseY
-      }
-      dom.style['transform'] = `rotateY(${X / 50}deg) rotateX(${Y / 50}deg)`
-      dom.style.transform = `rotateY(${X / 50}deg) rotateX(${Y / 50}deg)`
-    },
-    bgOut (dom) {
-      dom.style['transform'] = 'rotateY(0deg) rotateX(0deg)'
-      dom.style.transform = 'rotateY(0deg) rotateX(0deg)'
-    },
-    showNotify () {
-      var value = getStore('notify')
-      if (this.notify !== value) {
-        this.dialogVisible = true
-        setStore('notify', this.notify)
-      }
-    }
+    // autoPlay () {
+    //   this.mark++
+    //   if (this.mark > this.banner.length - 1) {
+    //     // 当遍历到最后一张图片置零
+    //     this.mark = 0
+    //   }
+    // },
+    // play () {
+    //   // 每2.5s自动切换
+    //   this.timer = setInterval(this.autoPlay, 2500)
+    // },
+    // change (i) {
+    //   this.mark = i
+    // },
+    // startTimer () {
+    //   this.timer = setInterval(this.autoPlay, 2500)
+    // },
+    // stopTimer () {
+    //   clearInterval(this.timer)
+    // },
+    // linkTo (item) {
+    //   if (item.type === 0 || item.type === 2) {
+    //     // 关联商品
+    //     this.$router.push({
+    //       path: '/goodsDetails',
+    //       query: {
+    //         productId: item.productId
+    //       }
+    //     })
+    //   } else {
+    //     // 完整链接
+    //     window.location.href = item.fullUrl
+    //   }
+    // },
+    // bgOver (e) {
+    //   this.bgOpt.px = e.offsetLeft
+    //   this.bgOpt.py = e.offsetTop
+    //   this.bgOpt.w = e.offsetWidth
+    //   this.bgOpt.h = e.offsetHeight
+    // },
+    // bgMove (dom, eve) {
+    //   let bgOpt = this.bgOpt
+    //   let X, Y
+    //   let mouseX = eve.pageX - bgOpt.px
+    //   let mouseY = eve.pageY - bgOpt.py
+    //   if (mouseX > bgOpt.w / 2) {
+    //     X = mouseX - bgOpt.w / 2
+    //   } else {
+    //     X = mouseX - bgOpt.w / 2
+    //   }
+    //   if (mouseY > bgOpt.h / 2) {
+    //     Y = bgOpt.h / 2 - mouseY
+    //   } else {
+    //     Y = bgOpt.h / 2 - mouseY
+    //   }
+    //   dom.style['transform'] = `rotateY(${X / 50}deg) rotateX(${Y / 50}deg)`
+    //   dom.style.transform = `rotateY(${X / 50}deg) rotateX(${Y / 50}deg)`
+    // },
+    // bgOut (dom) {
+    //   dom.style['transform'] = 'rotateY(0deg) rotateX(0deg)'
+    //   dom.style.transform = 'rotateY(0deg) rotateX(0deg)'
+    // },
+    // showNotify () {
+    //   var value = getStore('notify')
+    //   if (this.notify !== value) {
+    //     this.dialogVisible = true
+    //     setStore('notify', this.notify)
+    //   }
+    // }
   }
 }
 </script>

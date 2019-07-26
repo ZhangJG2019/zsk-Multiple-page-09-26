@@ -113,12 +113,13 @@
 import YButton from '/components/YButton'
 import { mapMutations, mapState } from 'vuex'
 import { getCartList, cartDel, getQuickSearch } from '/api/goods'
-import { loginOut, navList } from '/api/index'
+// import { loginOut, navList } from '/api/index'
+import { loginOut } from '/api/index'
 import { setStore, getStore, removeStore } from '/utils/storage'
 // import store from '../store/'
 import 'element-ui/lib/theme-default/index.css'
 export default {
-  data () {
+  data() {
     return {
       user: {},
       // 查询数据库的商品
@@ -139,7 +140,7 @@ export default {
   computed: {
     ...mapState(['cartList', 'login', 'receiveInCart', 'showCart', 'userInfo']),
     // 计算价格
-    totalPrice () {
+    totalPrice() {
       var totalPrice = 0
       this.cartList &&
         this.cartList.forEach(item => {
@@ -148,7 +149,7 @@ export default {
       return totalPrice
     },
     // 计算数量
-    totalNum () {
+    totalNum() {
       var totalNum = 0
       this.cartList &&
         this.cartList.forEach(item => {
@@ -167,7 +168,7 @@ export default {
       'RECORD_USERINFO',
       'EDIT_CART'
     ]),
-    handleIconClick (ev) {
+    handleIconClick(ev) {
       if (this.$route.path === '/search') {
         this.$router.push({
           path: '/refreshsearch',
@@ -184,16 +185,16 @@ export default {
         })
       }
     },
-    showError (m) {
+    showError(m) {
       this.$message.error({
         message: m
       })
     },
     // 导航栏文字样式改变
-    changePage (v) {
+    changePage(v) {
       this.choosePage = v
     },
-    changGoods (v, item) {
+    changGoods(v, item) {
       this.changePage(v)
       if (v === -1) {
         this.$router.push({
@@ -214,7 +215,7 @@ export default {
       }
     },
     // 搜索框提示
-    loadAll () {
+    loadAll() {
       let params = {
         params: {
           key: this.input
@@ -245,7 +246,7 @@ export default {
         }
       })
     },
-    querySearchAsync (queryString, cb) {
+    querySearchAsync(queryString, cb) {
       if (this.input === undefined) {
         cb([])
         return
@@ -261,15 +262,15 @@ export default {
         }, 300)
       }
     },
-    handleSelect (item) {
+    handleSelect(item) {
       this.input = item.value
     },
     // 购物车显示
-    cartShowState (state) {
+    cartShowState(state) {
       this.SHOW_CART({ showCart: state })
     },
     // 登陆时获取一次购物车商品
-    _getCartList () {
+    _getCartList() {
       getCartList({ userId: getStore('userId') })
         .then(res => {
           if (res.success === true) {
@@ -280,7 +281,7 @@ export default {
         .then(this.INIT_BUYCART)
     },
     // 删除商品
-    delGoods (productId) {
+    delGoods(productId) {
       if (this.login) {
         // 登陆了
         cartDel({ userId: getStore('userId'), productId }).then(res => {
@@ -290,11 +291,11 @@ export default {
         this.EDIT_CART({ productId })
       }
     },
-    toCart () {
+    toCart() {
       this.$router.push({ path: '/cart' })
     },
     // 控制顶部
-    navFixed () {
+    navFixed() {
       if (
         this.$route.path === '/goods' ||
         this.$route.path === '/home' ||
@@ -315,7 +316,7 @@ export default {
       }
     },
     // 退出登陆
-    _loginOut () {
+    _loginOut() {
       let params = {
         params: {
           token: this.token
@@ -327,7 +328,7 @@ export default {
       })
     },
     // 通过路由改变导航文字样式
-    getPage () {
+    getPage() {
       let path = this.$route.path
       // let fullPath = this.$route.fullPath
       if (path === '/' || path === '/home') {
@@ -338,18 +339,18 @@ export default {
         this.changePage(0)
       }
     },
-    openProduct (productId) {
+    openProduct(productId) {
       window.open(
         '//' + window.location.host + '/#/goodsDetails?productId=' + productId
       )
     },
-    _getNavList () {
-      navList().then(res => {
-        this.navList = res.result
-      })
+    _getNavList() {
+      // navList().then(res => {
+      //   this.navList = res.result
+      // })
     }
   },
-  mounted () {
+  mounted() {
     this._getNavList()
     this.token = getStore('token')
     if (this.login) {

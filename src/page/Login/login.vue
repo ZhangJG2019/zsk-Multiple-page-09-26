@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 <template>
   <div class="login v2">
     <div class="wrapper">
@@ -29,11 +30,11 @@
                 />
               </div>
             </li>
-            <li>
+            <!-- <li>
               <div id="captcha">
                 <p id="wait">正在加载验证码...</p>
               </div>
-            </li>
+            </li> -->
             <li style="text-align: right" class="pr">
               <el-checkbox class="auto-login" v-model="autoLogin"
                 >记住密码</el-checkbox
@@ -91,17 +92,19 @@
     </div>
   </div>
 </template>
-<script src="../../../static/geetest/gt.js"></script>
+<!--<script src="../../../static/geetest/gt.js"></script>-->
 <script>
 import YFooter from '/common/footer'
 import YButton from '/components/YButton'
-import { userLogin, geetest } from '/api/index.js'
-import { addCart } from '/api/goods.js'
+// import { userLogin, geetest } from '/api/index.js'
+import { userLogin } from '/api/index.js'
+// import { addCart } from '/api/goods.js'
 import { setStore, getStore, removeStore } from '/utils/storage.js'
-require('../../../static/geetest/gt.js')
-var captcha
+// require('../../../static/geetest/gt.js')
+// var captcha
+import qs from 'qs'
 export default {
-  data () {
+  data() {
     return {
       cart: [],
       loginPage: true,
@@ -122,29 +125,29 @@ export default {
     }
   },
   computed: {
-    count () {
+    count() {
       return this.$store.state.login
     }
   },
   methods: {
-    open (t, m) {
+    open(t, m) {
       this.$notify.info({
         title: t,
         message: m
       })
     },
-    messageSuccess () {
+    messageSuccess() {
       this.$message({
         message: '恭喜您，注册成功！赶紧登录体验吧',
         type: 'success'
       })
     },
-    message (m) {
+    message(m) {
       this.$message.error({
         message: m
       })
     },
-    getRemembered () {
+    getRemembered() {
       var judge = getStore('remember')
       if (judge === 'true') {
         this.autoLogin = true
@@ -152,7 +155,7 @@ export default {
         this.ruleForm.userPwd = getStore('rpassword')
       }
     },
-    rememberPass () {
+    rememberPass() {
       if (this.autoLogin === true) {
         setStore('remember', 'true')
         setStore('rusername', this.ruleForm.userName)
@@ -163,17 +166,17 @@ export default {
         removeStore('rpassword')
       }
     },
-    toRegister () {
+    toRegister() {
       this.$router.push({
         path: '/register'
       })
     },
     // 登录返回按钮
-    login_back () {
+    login_back() {
       this.$router.go(-1)
     },
     // 登陆时将本地的添加到用户购物车
-    login_addCart () {
+    login_addCart() {
       let cartArr = []
       let locaCart = JSON.parse(getStore('buyCart'))
       if (locaCart && locaCart.length) {
@@ -187,7 +190,8 @@ export default {
       }
       this.cart = cartArr
     },
-    login () {
+    login() {
+      console.log(window.localStorage)
       this.logintxt = '登录中...'
       this.rememberPass()
       if (!this.ruleForm.userName || !this.ruleForm.userPwd) {
@@ -195,76 +199,62 @@ export default {
         this.message('账号或者密码不能为空!')
         return false
       }
-      var result = captcha.getValidate()
-      if (!result) {
-        this.message('请完成验证')
-        this.logintxt = '登录'
-        return false
-      }
       var params = {
         userName: this.ruleForm.userName,
-        userPwd: this.ruleForm.userPwd,
-        challenge: result.geetest_challenge,
-        validate: result.geetest_validate,
-        seccode: result.geetest_seccode,
-        statusKey: this.statusKey
+        userPwd: this.ruleForm.userPwd
       }
-      userLogin(params).then(res => {
-        if (res.result.state === 1) {
-          setStore('token', res.result.token)
-          setStore('userId', res.result.id)
-          // 登录后添加当前缓存中的购物车
-          if (this.cart.length) {
-            for (var i = 0; i < this.cart.length; i++) {
-              addCart(this.cart[i]).then(res => {
-                if (res.success === true) {
-                }
-              })
-            }
-            removeStore('buyCart')
-            this.$router.push({
-              path: '/'
-            })
+      // eslint-disable-next-line no-debugger
+      debugger
+      var a = qs.stringify(params)
+      userLogin(a)
+        .then(res => {
+          if (res.status === 200) {
+            window.sessionStorage.setItem('token', res.token)
+            return this.$message.success(res.data.message)
           } else {
-            this.$router.push({
-              path: '/'
-            })
+            return this.$message.error(res.message)
           }
-        } else {
-          this.logintxt = '登录'
-          this.message(res.result.message)
-          captcha.reset()
-          return false
-        }
-      })
-    },
-    init_geetest () {
-      geetest().then(res => {
-        this.statusKey = res.statusKey
-        window.initGeetest(
-          {
-            gt: res.gt,
-            challenge: res.challenge,
-            new_captcha: res.new_captcha,
-            offline: !res.success,
-            product: 'popup',
-            width: '100%'
-          },
-          function (captchaObj) {
-            captcha = captchaObj
-            captchaObj.appendTo('#captcha')
-            captchaObj.onReady(function () {
-              document.getElementById('wait').style.display = 'none'
-            })
+          // return this.$message.success('登录成功')
+        })
+        .catch(res => {
+          // eslint-disable-next-line no-debugger
+          debugger
+          if (res.response === null) {
           }
-        )
-      })
+          if (res.response.data == null) {
+            return this.$message.error('发送异常，登录失败')
+          } else {
+            return this.$message.error(res.response.data.message)
+          }
+        })
     }
+    // init_geetest () {
+    //   geetest().then(res => {
+    //     this.statusKey = res.statusKey
+    //     window.initGeetest(
+    //       {
+    //         gt: res.gt,
+    //         challenge: res.challenge,
+    //         new_captcha: res.new_captcha,
+    //         offline: !res.success,
+    //         product: 'popup',
+    //         width: '100%'
+    //       }
+    //       // function (captchaObj) {
+    //       //   captcha = captchaObj
+    //       //   captchaObj.appendTo('#captcha')
+    //       //   captchaObj.onReady(function () {
+    //       //     document.getElementById('wait').style.display = 'none'
+    //       //   })
+    //       // }
+    //     )
+    //   })
+    // }
   },
-  mounted () {
+  mounted() {
     this.getRemembered()
     this.login_addCart()
-    this.init_geetest()
+    // this.init_geetest()
     this.open('登录提示', '测试体验账号密码：test | test')
   },
   components: {

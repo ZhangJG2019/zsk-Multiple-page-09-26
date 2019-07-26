@@ -1,19 +1,31 @@
 import http from './public'
 // 登陆
+// export const userLogin = (params) => {
+//   return http.fetchPost('/front/member/login', params)
+// }
 export const userLogin = (params) => {
-  return http.fetchPost('/front/member/login', params)
+  return http.fetchPost('/front/login', params)
 }
 // 退出登陆
+// export const loginOut = (params) => {
+//   return http.fetchGet('/front/member/loginOut', params)
+// }
 export const loginOut = (params) => {
-  return http.fetchGet('/front/member/loginOut', params)
+  return http.fetchGet('/front/loginOut', params)
 }
 // 用户信息
+// export const userInfo = (params) => {
+//   return http.fetchGet('/front/member/checkLogin', params)
+// }
 export const userInfo = (params) => {
-  return http.fetchGet('/front/member/checkLogin', params)
+  return http.fetchGet('/front/checkLogin', params)
 }
 // 注册账号
-export const register = (params) => {
-  return http.fetchPost('/front/member/register', params)
+// export const register = (params) => {
+//   return http.fetchPost('/front/member/register', params)
+// }
+export const regist = (params) => {
+  return http.fetchPost('/front/regist', params)
 }
 // 上传图片
 export const upload = (params) => {
@@ -28,13 +40,13 @@ export const thanksList = (params) => {
   return http.fetchGet('/front/member/thanks', params)
 }
 // 首页接口
-export const productHome = (params) => {
-  return http.fetchGet('/front/goods/home', params)
-}
+// export const productHome = (params) => {
+//   return http.fetchGet('/front/goods/home', params)
+// }
 // 首页接口
-export const navList = (params) => {
-  return http.fetchGet('/front/goods/navList', params)
-}
+// export const navList = (params) => {
+//   return http.fetchGet('/front/goods/navList', params)
+// }
 // 推荐板块
 export const recommend = (params) => {
   return http.fetchGet('/front/goods/recommend', params)
@@ -44,6 +56,6 @@ export const thank = (params) => {
   return http.fetchGet('/front/goods/thank', params)
 }
 // 极验验证码
-export const geetest = (params) => {
-  return http.fetchGet('/front/member/geetestInit?t=' + (new Date()).getTime(), params)
-}
+// export const geetest = (params) => {
+//   return http.fetchGet('/front/member/geetestInit?t=' + (new Date()).getTime(), params)
+// }

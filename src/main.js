@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 import Vue from 'vue'
 import App from './App'
 import router from './router'
@@ -78,10 +79,12 @@ router.beforeEach(function (to, from, next) {
     }
   }
   userInfo(params).then(res => {
-    if (res.result.state !== 1) { // 没登录
-      if (whiteList.indexOf(to.path) !== -1) { // 白名单
+    debugger
+    console.log(res)
+    if (res !== 1) { // 没登录！==
+      if (whiteList.indexOf(to.path) !== -1) { // 白名单,如果在白名单中，就免登录
         next()
-      } else {
+      } else { // 如果不在白名单中， 就跳转到登录页面
         next('/login')
       }
     } else {
