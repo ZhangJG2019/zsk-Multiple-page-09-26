@@ -115,7 +115,7 @@ import { mapMutations, mapState } from 'vuex'
 // import { getCartList, cartDel, getQuickSearch } from '/api/goods'
 // import { loginOut, navList } from '/api/index'
 import { loginOut } from '/api/index'
-import { setStore, getStore, removeStore } from '/utils/storage'
+import { getStore, removeStore } from '/utils/storage'
 // import store from '../store/'
 import 'element-ui/lib/theme-default/index.css'
 export default {
