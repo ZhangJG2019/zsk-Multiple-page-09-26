@@ -151,7 +151,7 @@ import YFooter from '/common/footer'
 import $ from 'jquery'
 import 'element-ui'
 export default {
-  data () {
+  data() {
     return {
       outerVisible: false,
       innerVisible: false,
@@ -161,7 +161,7 @@ export default {
         {
           taskname: '药物基因用药建议的给出-词条001',
           starttime: '2019-07-10 21:16:05',
-          endtime: '2019-07-11 20:16:05',
+          endtime: '2019-07-11 20:16:11',
           taskpeople: 'administrator',
           Markpart: '111',
           inspector: '222',
@@ -174,7 +174,7 @@ export default {
         {
           taskname: '药物基因用药建议的给出-词条002',
           starttime: '2019-07-10 21:16:05',
-          endtime: '2019-07-11 20:16:05',
+          endtime: '2019-07-11 20:16:12',
           taskpeople: '55',
           Markpart: '666',
           inspector: '77',
@@ -187,7 +187,7 @@ export default {
         {
           taskname: '药物基因用药建议的给出-词条003',
           starttime: '2019-07-10 21:16:05',
-          endtime: '2019-07-11 20:16:05',
+          endtime: '2019-07-11 20:16:10',
           taskpeople: 'administrator',
           Markpart: 'administrator',
           inspector: 'administrator',
@@ -200,7 +200,7 @@ export default {
         {
           taskname: '药物基因用药建议的给出-词条004',
           starttime: '2019-07-10 21:16:05',
-          endtime: '2019-07-11 20:16:05',
+          endtime: '2019-07-11 20:16:01',
           taskpeople: 'administrator',
           Markpart: 'administrator',
           inspector: 'administrator',
@@ -213,7 +213,7 @@ export default {
         {
           taskname: '药物基因用药建议的给出-词条005',
           starttime: '2019-07-10 21:16:05',
-          endtime: '2019-07-11 20:16:05',
+          endtime: '2019-07-11 20:16:04',
           taskpeople: 'administrator',
           Markpart: 'administrator',
           inspector: 'administrator',
@@ -226,7 +226,7 @@ export default {
         {
           taskname: '药物基因用药建议的给出-词条006',
           starttime: '2019-07-10 21:16:05',
-          endtime: '2019-07-11 20:16:05',
+          endtime: '2019-07-11 20:16:02',
           taskpeople: 'administrator',
           Markpart: 'administrator',
           inspector: 'administrator',
@@ -239,7 +239,7 @@ export default {
         {
           taskname: '药物基因用药建议的给出-词条007',
           starttime: '2019-07-10 21:16:05',
-          endtime: '2019-07-11 20:16:05',
+          endtime: '2019-07-11 20:16:03',
           taskpeople: 'administrator',
           Markpart: 'administrator',
           inspector: 'administrator',
@@ -252,7 +252,7 @@ export default {
         {
           taskname: '药物基因用药建议的给出-词条008',
           starttime: '2019-07-10 21:16:05',
-          endtime: '2019-07-11 20:16:05',
+          endtime: '2019-07-11 20:16:06',
           taskpeople: 'administrator',
           Markpart: 'administrator',
           inspector: 'administrator',
@@ -265,7 +265,7 @@ export default {
         {
           taskname: '药物基因用药建议的给出-词条009',
           starttime: '2019-07-10 21:16:05',
-          endtime: '2019-07-11 20:16:05',
+          endtime: '2019-07-11 20:16:15',
           taskpeople: 'administrator',
           Markpart: 'administrator',
           inspector: 'administrator',
@@ -278,7 +278,7 @@ export default {
         {
           taskname: '药物基因用药建议的给出-词条010',
           starttime: '2019-07-10 21:16:05',
-          endtime: '2019-07-11 20:16:05',
+          endtime: '2019-07-11 20:16:25',
           taskpeople: 'administrator',
           Markpart: 'administrator',
           inspector: 'administrator',
@@ -291,7 +291,7 @@ export default {
         {
           taskname: '药物基因用药建议的给出-词条011',
           starttime: '2019-07-10 21:16:05',
-          endtime: '2019-07-11 20:16:05',
+          endtime: '2019-07-11 20:16:35',
           taskpeople: 'administrator',
           Markpart: 'administrator',
           inspector: 'administrator',
@@ -304,7 +304,7 @@ export default {
         {
           taskname: '药物基因用药建议的给出-词条012',
           starttime: '2019-07-10 21:16:05',
-          endtime: '2019-07-11 20:16:05',
+          endtime: '2019-07-11 20:16:45',
           taskpeople: 'administrator',
           Markpart: 'administrator',
           inspector: 'administrator',
@@ -317,7 +317,7 @@ export default {
         {
           taskname: '药物基因用药建议的给出-词条013',
           starttime: '2019-07-10 21:16:05',
-          endtime: '2019-07-11 20:16:05',
+          endtime: '2019-07-11 20:16:55',
           taskpeople: 'administrator',
           Markpart: 'administrator',
           inspector: 'administrator',
@@ -330,7 +330,7 @@ export default {
         {
           taskname: '药物基因用药建议的给出-词条014',
           starttime: '2019-07-10 21:16:05',
-          endtime: '2019-07-11 20:16:05',
+          endtime: '2019-07-11 20:16:17',
           taskpeople: 'administrator',
           Markpart: 'administrator',
           inspector: 'administrator',
@@ -343,7 +343,7 @@ export default {
         {
           taskname: '药物基因用药建议的给出-词条015',
           starttime: '2019-07-10 21:16:05',
-          endtime: '2019-07-11 20:16:05',
+          endtime: '2019-07-11 20:16:27',
           taskpeople: 'administrator',
           Markpart: 'administrator',
           inspector: 'administrator',
@@ -356,7 +356,7 @@ export default {
         {
           taskname: '药物基因用药建议的给出-词条016',
           starttime: '2019-07-10 21:16:05',
-          endtime: '2019-07-11 20:16:05',
+          endtime: '2019-07-11 20:16:37',
           taskpeople: 'administrator',
           Markpart: 'administrator',
           inspector: 'administrator',
@@ -369,7 +369,7 @@ export default {
         {
           taskname: '药物基因用药建议的给出-词条017',
           starttime: '2019-07-10 21:16:05',
-          endtime: '2019-07-11 20:16:05',
+          endtime: '2019-07-11 20:16:16',
           taskpeople: 'administrator',
           Markpart: 'administrator',
           inspector: 'administrator',
@@ -382,7 +382,7 @@ export default {
         {
           taskname: '药物基因用药建议的给出-词条018',
           starttime: '2019-07-10 21:16:05',
-          endtime: '2019-07-11 20:16:05',
+          endtime: '2019-07-11 20:16:26',
           taskpeople: 'administrator',
           Markpart: 'administrator',
           inspector: 'administrator',
@@ -395,7 +395,7 @@ export default {
         {
           taskname: '药物基因用药建议的给出-词条019',
           starttime: '2019-07-10 21:16:05',
-          endtime: '2019-07-11 20:16:05',
+          endtime: '2019-07-11 20:16:36',
           taskpeople: 'administrator',
           Markpart: 'administrator',
           inspector: 'administrator',
@@ -408,7 +408,7 @@ export default {
         {
           taskname: '药物基因用药建议的给出-词条020',
           starttime: '2019-07-10 21:16:05',
-          endtime: '2019-07-11 20:16:05',
+          endtime: '2019-07-11 20:16:46',
           taskpeople: 'administrator',
           Markpart: 'administrator',
           inspector: 'administrator',
@@ -421,7 +421,7 @@ export default {
         {
           taskname: '药物基因用药建议的给出-词条021',
           starttime: '2019-07-10 21:16:05',
-          endtime: '2019-07-11 20:16:05',
+          endtime: '2019-07-11 20:16:56',
           taskpeople: 'administrator',
           Markpart: 'administrator',
           inspector: 'administrator',
@@ -434,7 +434,7 @@ export default {
         {
           taskname: '药物基因用药建议的给出-词条022',
           starttime: '2019-07-10 21:16:05',
-          endtime: '2019-07-11 20:16:05',
+          endtime: '2019-07-11 20:16:55',
           taskpeople: 'administrator',
           Markpart: 'administrator',
           inspector: 'administrator',
@@ -447,34 +447,34 @@ export default {
       ]
     }
   },
-  mounted () {
+  mounted() {
     // 点击首页跳转页面 1
-    $('.index').click(function () {
+    $('.index').click(function() {
       $('a', this)[0].click()
     })
     // 点击首页跳转页面 2
-    // 领取任务 1
+    // 通过iframe领取任务 1
 
-    // 领取任务 2
+    // 通过iframe领取任务 2
   },
   methods: {
     // 切换页面
-    handleCurrentChange (val) {
+    handleCurrentChange(val) {
       this.currentRow = val
     },
-    handleCurrentChanges: function (currentPage) {
+    handleCurrentChanges: function(currentPage) {
       this.currentPage = currentPage
       console.log(this.currentPage) // 点击第几页
     },
-    choose_card1 () {
+    choose_card1() {
       this.$refs.button11.text = '编辑任务'
     },
     // 任务类型
-    filterTags (value, row) {
+    filterTags(value, row) {
       return row.taskType === value
     },
     // 任务状态
-    filterTag (value, row) {
+    filterTag(value, row) {
       return row.Taskstatus === value
     }
   },

@@ -35,7 +35,8 @@ import {
   CheckboxGroup
 } from 'element-ui'
 import {
-  getStore
+  getStore,
+  removeStore
 } from '/utils/storage'
 import VueContentPlaceholders from 'vue-content-placeholders'
 Vue.use(VueContentPlaceholders)

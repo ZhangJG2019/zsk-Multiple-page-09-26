@@ -41,6 +41,7 @@
               <el-checkbox class="auto-login" v-model="autoLogin"
                 >记住密码</el-checkbox
               >
+              <a href="#/home" class="register">首页</a>
               <!-- <span class="pa" style="top: 0;left: 0;color: #d44d44">{{ruleForm.errMsg}}</span> -->
               <a href="javascript:;" class="register" @click="toRegister"
                 >注册 三济生物 账号</a

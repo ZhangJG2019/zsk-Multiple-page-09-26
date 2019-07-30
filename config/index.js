@@ -29,9 +29,9 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/front': {
+        target: 'http://192.168.1.160:8084',
         // target: 'http://192.168.1.66:8883',
-        // target: 'http://192.168.1.160:8084',
-        target: 'http: //47.104.168.172:8084',
+        // target: 'http: //47.104.168.172:8084',
         changeOrigin: true,
         pathRewrite: {
           '^/front': '/' //通过pathRewrite重写地址，将前缀/front转为/
@@ -39,16 +39,16 @@ module.exports = {
       }
     },
 
-    // proxyTable_bak: {
-    //   '/front': {
-    //     // target: 'http://localhost:8883/front',
-    //     target: 'http://localhost:8084/front',
-    //     changeOrigin: true,
-    //     pathRewrite: {
-    //       '^/front': ''
-    //     }
-    //   }
-    // },
+    proxyTable_bak: {
+      '/front': {
+        target: 'http://localhost:8084/front',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/front': '/'
+        }
+      }
+    },
+
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README
     // (https://github.com/webpack/css-loader#sourcemaps)

@@ -5,9 +5,8 @@
         <div class="w-box">
           <div class="nav-logo">
             <h1 @click="changePage(-1)">
-              <router-link to="/" title="三济生物商城官网"
-                >三济生物商城</router-link
-              >
+              <router-link to="/" title="三济生物官网">三济生物</router-link>
+              <!-- <p class="title">三济生物</p> -->
               <!-- <a href="/home">
                 <img src="../../static/images/logo.png" alt="" />
               </a> -->
@@ -112,7 +111,7 @@
 <script>
 import YButton from '/components/YButton'
 import { mapMutations, mapState } from 'vuex'
-// import { getCartList, cartDel, getQuickSearch } from '/api/goods'
+import { getQuickSearch } from '/api/goods'
 // import { loginOut, navList } from '/api/index'
 import { loginOut } from '/api/index'
 import { getStore, removeStore } from '/utils/storage'
@@ -249,20 +248,6 @@ export default {
       this.input = item.value
     },
 
-    // 删除商品
-    delGoods(productId) {
-      if (this.login) {
-        // 登陆了
-        cartDel({ userId: getStore('userId'), productId }).then(res => {
-          this.EDIT_CART({ productId })
-        })
-      } else {
-        this.EDIT_CART({ productId })
-      }
-    },
-    toCart() {
-      this.$router.push({ path: '/cart' })
-    },
     // 控制顶部
     navFixed() {
       if (
@@ -332,6 +317,12 @@ export default {
 <style lang="scss" rel="stylesheet/scss" scoped>
 @import '../assets/style/theme';
 @import '../assets/style/mixin';
+.title {
+  color: #fff;
+  font-size: 30px;
+  font-weight: 700;
+  margin-left: 20px;
+}
 
 .move_in_cart {
   animation: mymove 0.5s ease-in-out;
@@ -434,10 +425,10 @@ header {
     align-items: center;
     > a {
       // background: url(/static/images/global-logo-red@2x.png) no-repeat 50%;
-      background: url(/static/images/enterlogo.png) no-repeat;
+      background: url(/static/images/sanjinewlogo.png) no-repeat;
       background-size: cover;
       display: block;
-      @include wh(56px, 40px);
+      @include wh(170px, 40px);
       text-indent: -9999px;
       background-position: 0 0;
     }

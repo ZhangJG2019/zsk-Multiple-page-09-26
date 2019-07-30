@@ -24,7 +24,6 @@ const orderDetail = () => import('/page/User/children/orderDetail.vue')
 const Alipay = () => import('/page/Order/alipay.vue')
 const Wechat = () => import('/page/Order/wechat.vue')
 const QQpay = () => import('/page/Order/qqpay.vue')
-const Taskcontrol = () => import('/page/Taskcontrol/taskcontrol.vue') // 任务大厅
 
 Vue.use(Router)
 export default new Router({
@@ -50,11 +49,7 @@ export default new Router({
         path: '/refreshgoods',
         name: 'refreshgoods',
         component: RefreshGoods
-      }, {
-          path: '/taskcontrol',
-          name: 'taskcontrol',
-          component: Taskcontrol
-        }
+      }
       ]
   },
   {
