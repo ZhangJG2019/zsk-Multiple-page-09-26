@@ -1,5 +1,4 @@
 /* eslint-disable no-unreachable */
-/* eslint-disable no-unreachable */
 <template>
   <div class="login v2">
     <div class="wrapper">
@@ -52,6 +51,7 @@
                   v-model="ruleForm.verifyCode"
                   style="width: 50%;"
                   placeholder="请输入验证码"
+                  :maxlength="6"
                 ></el-input>
                 <el-button
                   class="smsMsg"
@@ -111,17 +111,14 @@
     </div>
   </div>
 </template>
-<!--<script src="../../../static/geetest/gt.js"></script>--> 
-
 <script>
 import YFooter from '/common/footer'
 import YButton from '/components/YButton'
 import { regist } from '/api/index.js'
-// require('../../../static/geetest/gt.js')
 import 'element-ui'
 // import $ from 'jquery'
 import axios from 'axios'
-import qs from 'qs'
+// import qs from 'qs'
 export default {
   data() {
     return {
@@ -142,7 +139,7 @@ export default {
       },
       // 注册页面字段
       ruleForm: {
-        mobile: '15153683400',
+        mobile: '15101024057',
         username: '',
         password: '',
         verifyCode: '',
@@ -180,60 +177,8 @@ export default {
       formLabelWidth: '1px'
     }
   },
-  computed: {
-    count() {
-      return this.$store.state.login
-    }
-  },
+  computed: {},
   methods: {
-    login() {
-      // 对登录的form表单进行整体校验
-      // this.$refs.loginFormRef.validate(function(valid){})
-      this.$refs.loginFormRef.validate(valid => {
-        // console.log(valid)  true/false 校验成功或失败
-        if (valid === true) {
-          // 用户信息真实性校验
-          // axios带着用户信息 去到 后端数据库校验
-          axios
-            .post(
-              '/front/login',
-              qs.stringify({
-                username: this.form.username,
-                password: this.form.password
-              })
-            )
-            .then(res => {
-              if (res.status === 200) {
-                window.localStorage.setItem('token', res.token)
-                return this.$message.success(res.data.message)
-              } else {
-                return this.$message.error(res.message)
-              }
-              // return this.$message.success('登录成功')
-            })
-            .catch(res => {
-              if (res.response === null) {
-              }
-              if (res.response.data == null) {
-                return this.$message.error('发送异常，登录失败')
-              } else {
-                return this.$message.error(res.response.data.message)
-              }
-            })
-          // 判断用户名或密码 真实性校验失败
-          // 通过浏览器的sessionStorage记录服务器返回的token信息
-          // (校验成功)页面重定向到首页(/index)
-          // this.$router.push('/index')
-        }
-      })
-    },
-    // 注销操作
-    logout() {
-      // 移除sessionStorage中的token
-      localStorage.removeItem('token')
-      // 清空username 的数据
-      this.form.username = null
-    },
     // 手机验证发送验证码
     sendcode() {
       const reg = 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/
@@ -291,23 +236,29 @@ export default {
           data.append('verifyCode', this.ruleForm.verifyCode)
           regist(data)
             .then(res => {
-              console.log(res)
-              this.$message({
-                message: res.message,
-                type: 'success'
-              })
-              window.location.href = '/login'
-              return
-              // alert('注册成功!')
-              // this.sizeForm = { brand_right: 0 }
+              console.log('RES=1' + res)
+              if (res.status === 0) {
+                this.$message({
+                  message: res.message,
+                  type: 'success'
+                })
+                return this.$router.push({
+                  path: '/login'
+                })
+              } else {
+                console.log('RES=其他' + res)
+                return this.$message.error(res.message)
+              }
             })
             .catch(res => {
+              console.log(222)
               this.$message({
                 message: res.message,
                 type: 'error'
               })
             })
         } else {
+          console.log(333)
           return false
         }
       })

@@ -1,6 +1,4 @@
 /* eslint-disable no-debugger */
-/* eslint-disable no-debugger */
-/* eslint-disable no-debugger */
 <template>
   <div class="login v2">
     <div class="wrapper">
@@ -24,12 +22,19 @@
             </li>
             <li>
               <div class="input">
-                <input
+                <!-- <input
                   type="password"
                   v-model="ruleForm.userPwd"
                   @keyup.enter="login"
                   placeholder="密码"
-                />
+                /> -->
+                <el-input
+                  placeholder="请输入密码"
+                  type="password"
+                  v-model="ruleForm.userPwd"
+                  @keyup.enter="login"
+                  show-password
+                ></el-input>
               </div>
             </li>
             <!-- <li>
@@ -87,17 +92,13 @@
     </div>
   </div>
 </template>
-<!--<script src="../../../static/geetest/gt.js"></script>-->
 <script>
 import YFooter from '/common/footer'
 import YButton from '/components/YButton'
-// import { userLogin, geetest } from '/api/index.js'
 import { userLogin } from '/api/index.js'
-// import { addCart } from '/api/goods.js'
 import { setStore, getStore, removeStore } from '/utils/storage.js'
-// require('../../../static/geetest/gt.js')
-// var captcha
-// import qs from 'qs'
+import 'element-ui'
+
 export default {
   data() {
     return {
@@ -125,6 +126,7 @@ export default {
     }
   },
   methods: {
+    // 提示信息消息框
     open(t, m) {
       this.$notify.info({
         title: t,
@@ -143,6 +145,7 @@ export default {
         type: 'error'
       })
     },
+    // 获取vuex中登陆的状态
     getRemembered() {
       var judge = getStore('remember')
       if (judge === 'true') {
@@ -151,6 +154,7 @@ export default {
         this.ruleForm.userPwd = getStore('rpassword')
       }
     },
+    // 使用vuex保存登录状态
     rememberPass() {
       if (this.autoLogin === true) {
         setStore('remember', 'true')
@@ -162,6 +166,7 @@ export default {
         removeStore('rpassword')
       }
     },
+    // 跳转到登录页
     toRegister() {
       this.$router.push({
         path: '/register'
@@ -171,7 +176,7 @@ export default {
     login_back() {
       this.$router.go(-1)
     },
-
+    // 登录
     login() {
       this.logintxt = '登录中...'
       this.rememberPass()
@@ -180,7 +185,6 @@ export default {
         this.message('账号或者密码不能为空!')
         return false
       }
-
       let data = new FormData()
       data.append('username', this.ruleForm.userName)
       data.append('password', this.ruleForm.userPwd)
@@ -194,6 +198,7 @@ export default {
               message: res.message,
               type: 'success'
             })
+            this.logintxt = '登录'
             return this.$router.push({
               path: '/'
             })
@@ -204,11 +209,10 @@ export default {
         })
         .catch(res => {
           // eslint-disable-next-line no-debugger
-
           if (res.response === null) {
-            return this.$message.error('发送异常，登录失败2222')
+            return this.$message.error('用户或密码错误')
           } else {
-            return this.$message.error('本地发生其他异常666')
+            return this.$message.error('用户不存在')
           }
         })
     }
